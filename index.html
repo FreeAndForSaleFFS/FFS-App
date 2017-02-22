@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Free and For Sale</title>
+          <!-- Bootstrap Core CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="styles.css" rel="stylesheet">
+        <link href="jquery-ui.css" rel="stylesheet">
+
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script type= "text/javascript" src="myscripts.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+    </head>
+    <body>
+        <div class="login-page">
+            <div class="form">
+                <form id="register-form" class="register-form">
+                    <input id="signUpName" type="text" placeholder="first name"/>
+                    <input id="signUpLastName" type = "text" placeholder="last name"/>
+                    <input id="signUpEmail" type="text" placeholder="email address"/>
+                    <input id="signUpPassword" type="password" placeholder="password"/>
+                    <input id="signUpConfirmPassword" type="password" placeholder="confirm password"/>
+                    <button type ="button" id="signUpButton">create</button>
+                    <p class="message">Already registered? <a id="rlForm" href="#">Sign In</a></p>
+                </form>
+                <form id="login-form" class="login-form">
+                    <input id="signInEmail" type="text" placeholder="email address"/>
+                    <input id="signInPassword" type="password" placeholder="password"/>
+                    <button type="button" id="signInButton">login</button>
+                    <p class="message">Not registered? <a id="lrForm" href="#">Create an account</a></p>
+                    <p class="message">Forgot Password? <a id="lfForm" href="#">Reset Password</a></p>
+                </form>
+                <form id="forgot-form" class="forgot-form">
+	                <input id="forgotEmail" type="text" placeholder="email address"/>
+                    <button type="button" id="forgotButton">Reset Password</button>
+                    <p class="message">Not registered? <a id="frForm" href="#">Create an account</a></p>
+                    <p class="message">Remembered password? <a id="flForm" href="#">Login</a></p>
+                </form>
+            </div>
+        </div>
+        <script type="text/javascript" src="app.js"></script>
+    </body>
+</html>
