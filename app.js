@@ -96,6 +96,7 @@ $(document).ready(function () {
         firebase.auth().createUserWithEmailAndPassword(email, password)
             .then(function (user) {
                 //signup_success = true;
+                alert('A link has been sent to your e-mail to verify your account');
                 sendEmailVerification();
                 writeUserData(user.uid, fullname, email);
             })
