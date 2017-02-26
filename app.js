@@ -10,7 +10,6 @@ $(document).ready(function () {
         messagingSenderId: "29173486724"
     };
     firebase.initializeApp(config);
-
     function toggleSignIn() {
         if (firebase.auth().currentUser) {
             // [START signout]
@@ -153,15 +152,28 @@ $(document).ready(function () {
             }
         );
     }
-    firebase.auth().onAuthStateChanged(function(user) {
-        if (user) {
-          
-        // User is signed in.
-        }else {
-           
-            // No user is signed in.
+    
+    function writeBuyPost() {
+        
+        var postRef, categoryRef, entryKey;
+        var post = {};
+        post.itemName = document.getElementById('newItemName').value;
+        post.itemPrice = document.getElementById('newItemPrice').value;
+        post.checked = false;
+        if(document.getElementById('negotiableCheck').checked) {
+            post.checked = true;
         }
-    });
+        post.itemDescription = document.getElementById('newItemDescription').value;
+        post.category = document.getElementById('newItemCategory').value;
+        entryKey = post.itemName;
+        console.log(post.itemName);
+        firebase.database().ref('posts/' + entryKey).set(
+            post,
+            function (onComplete) {
+                window.location.href = "index.html";
+            }
+        );
+    }
     
     document.getElementById('signInButton').addEventListener('click', toggleSignIn);
     document.getElementById('signUpButton').addEventListener('click', handleSignUp);

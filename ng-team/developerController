@@ -1,0 +1,59 @@
+/*global alert,angular,Firebase*/
+angular
+    .module('ngteam')
+    .controller('DeveloperController', function ($scope, $timeout) {
+        "use strict";
+        var Sahib = {
+            name: "Sahib Grover",
+            image: "Images/Developers/Sahib.jpg",
+            title: "Project Manager"
+        };
+        var Douglas = {
+            name: "Douglas Pan",
+            image: "Images/Developers/Douglas.jpg",
+            title: "Deputy Project Manager"
+        };
+        var Derek = {
+            name: "Derek Tu",
+            image: "Images/Developers/Derek.jpg",
+            title: "Software Development Lead"
+        };
+        var Erik = {
+            name: "Erik Syu",
+            image: "Images/Developers/Erik.jpg",
+            title: "Software Architect"
+        };
+        var Vincent = {
+            name: "Vincent Tsui",
+            image: "Images/Developers/Vincent.jpg",
+            title: "Database Specialist"
+        };
+        var Sahir = {
+            name: "Sahir Kochhar",
+            image: "Images/Developers/Sahir.jpg",
+            title: "Algorithm Specialist"
+        };
+        var Jack = {
+            name: "Jack Cho",
+            image: "Images/Developers/Jack.jpg",
+            title: "Senior System Analyst"
+        };
+        var TaeHo = {
+            name: "Tae Ho Kim",
+            image: "Images/Developers/TaeHo.jpg",
+            title: "Quality Assurance Lead"
+        };
+        var Jian = {
+            name: "Jian Huang",
+            image: "Images/Developers/Jian.jpg",
+            title: "User Interface Specialist"
+        };
+        var Rohit = {
+            name: "Rohit Vallumchetla",
+            image: "Images/Developers/Rohit.jpg",
+            title: "Business Analyst"
+        };
+
+        $scope.developers = [Sahib, Douglas, Derek, Erik, Vincent, Sahir, Jack, TaeHo, Jian, Rohit];
+    
+});

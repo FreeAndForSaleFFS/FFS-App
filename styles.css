@@ -142,3 +142,27 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;      
 }
+#uploader {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    margin-bottom: 10px;
+}
+#fileButton {
+    width: 100%;
+}
+.users {
+    width: 15em;
+    height: 14em;
+}
+#developerNavbar {
+    display: block;
+    border-radius: 5px;
+}
+#usertable {
+    margin: 10em;
+}
+.panel-body {
+    background: #E7E7E7;
+    margin: 1em;
+}

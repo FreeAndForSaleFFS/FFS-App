@@ -29,7 +29,7 @@
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">FFS</a>
+                    <a class="navbar-brand" href="Developers.html">FFS</a>
                 </div>
                 <ul class="nav navbar-nav">
                     <li><a href="#">Browse</a></li>
@@ -45,7 +45,7 @@
                     </div>
                 </form>
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="active"><a href="#"><span class="glyphicon glyphicon-plus"></span></a></li>
+                    <li class="active"><a href="newPost.html"><span class="glyphicon glyphicon-plus"></span></a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-user"></span></a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-cog"></span></a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
@@ -60,7 +60,7 @@
                     <label>Negotiable<input id="negotiableCheck" type="checkbox"/></label><br/>
                     <label>Item Description:</label><input id="newItemDescription" type="text"/>
                     <label>Category:</label>
-                    <select>
+                    <select id = "newItemCategory">
                         <option value="Books">Books</option>
                         <option value="Notes">Notes</option>
                         <option value="Furniture">Furniture</option>
@@ -69,6 +69,8 @@
                         <option value="Services">Services</option>
                         <option value="Other">Other</option>
                     </select><br/>
+                    <progress value="0"  max="100" id="uploader">0%</progress>
+                    <input type="file" value="upload" id="fileButton" />
                     <button type ="button" id="newBuyButton" class= "newButtons">BUY</button>
                     <button type ="button" id="newSellButton" class = "newButtons">SELL</button>
                 </form>
@@ -76,7 +78,7 @@
         </div>
         <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script> 
         <script type="text/javascript" src="angular.min.js"></script>
-        <script type="text/javascript" src="app.js"></script>
+        <script type="text/javascript" src="newPostJS.js"></script>
         <script type="text/javascript" src="ngteam.js"></script>
         <script type="text/javascript" src="ng-team/team/loginController.js"></script>
     </body>
