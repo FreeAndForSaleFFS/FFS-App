@@ -1,6 +1,12 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
 
 .login-page {
+  width: 360px;
+  padding: 8% 0 0;
+  margin: auto;
+}
+.new-post-page {
   width: 360px;
   padding: 8% 0 0;
   margin: auto;
@@ -15,7 +21,7 @@
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
-.form input {
+.login-page input {
   font-family: "Roboto", sans-serif;
   outline: 0;
   background: #f2f2f2;
@@ -26,7 +32,43 @@
   box-sizing: border-box;
   font-size: 14px;
 }
-.form button {
+#newItemDescription {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+.new-post-page input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 50%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 8px;
+  box-sizing: border-box;
+  font-size: 10px;
+}
+.newButtons {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #879eb0;
+  width: 33%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.login-page button {
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   outline: 0;
@@ -90,6 +132,9 @@
 }
 .container .info span .fa {
   color: #EF3B3A;
+}
+.label {
+    display:block;
 }
 body {
   background: #8bb3b4; /* fallback for old browsers */

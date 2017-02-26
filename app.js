@@ -153,6 +153,16 @@ $(document).ready(function () {
             }
         );
     }
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          
+        // User is signed in.
+        }else {
+           
+            // No user is signed in.
+        }
+    });
+    
     document.getElementById('signInButton').addEventListener('click', toggleSignIn);
     document.getElementById('signUpButton').addEventListener('click', handleSignUp);
     document.getElementById('forgotButton').addEventListener('click', sendPasswordReset);
