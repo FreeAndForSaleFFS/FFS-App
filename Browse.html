@@ -2,10 +2,10 @@
  <html>
     <head>
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <title>Team Members</title>
+        <title>Browse Page</title>
         <link href="styles.css" rel="stylesheet">
     </head>
-    <body ng-app="ngTeam" ng-controller="teamController">
+    <body ng-app="ngTeam" ng-controller="browseController">
         <div id="developerNavbar">
             <nav class="navbar navbar-default navbar-fixed-top">
                 <div class="container-fluid">
@@ -13,11 +13,11 @@
                         <a class="navbar-brand" href="Developers.html">FFS</a>
                     </div>
                     <ul class="nav navbar-nav">
-                        <li><a href="Browse.html">Browse</a></li>
+                        <li class="active"><a href="Browse.html">Browse</a></li>
                     </ul>
                     <form class="navbar-form navbar-left">
                         <div class="input-group">
-                            <input type="text" ng-model="searchBy" class="form-control" placeholder="Search">
+                            <input type="text" class="form-control" ng-model="searchBy" placeholder="Search">
                             <div class="input-group-btn">
                                 <button class="btn btn-default" type="submit">
                                     <i class="glyphicon glyphicon-search"></i>
@@ -34,38 +34,39 @@
                 </div>
             </nav>
         </div>
+
         <div id="usertable">
-            <div class="panel-body" ng-repeat="teamMember in teammatesData | filter:searchBy">
+            <div class="panel-body" ng-repeat="request in buyRequestData">
               <div class="row">
-                <div class="col-md-3 col-lg-3 " align="center"> <img class = "users" alt="User Pic" src={{teamMember.image}}> </div>
+                <div class="col-md-3 col-lg-3 " align="center"> <img class = "users" alt="User Pic" src={{request.imageLink}}> </div>
                     <div class=" col-md-3 col-lg-3 "> 
                         <div class="row">
-                            <div class="col-md-6 col-lg-6"><h3>Name:</h3></div>
-                            <div class="col-md-6 col-lg-6"><h3>{{teamMember.name}}</h3></div>
+                            <div class="col-md-6 col-lg-6"><h4>Item Name: {{request.itemName}}</h4></div>
+                            <!-- <div class="col-md-6 col-lg-6"><h4>{{request.itemName}}</h4></div> -->
                         </div>
                         <div class="row">
-                            <div class="col-md-6 col-lg-6"><h3>Positon:</h3></div>
-                            <div class="col-md-6 col-lg-6"><h3>{{teamMember.title}}</h3></div>
+                            <div class="col-md-6 col-lg-6"><h4>Price Negotiable?: {{request.checked ? "yes" : "no"}}</h4></div>
+                            <!-- <div class="col-md-6 col-lg-6"><h4>{{request.checked ? "yes" : "no"}}</h4></div> -->
                         </div>
                     </div>
                     <div class="col-md-3 col-lg-3 comments"> 
                         <div class="row">
-                            <div class = "col-md-3 col-lg-3"></div>
-                            <div class = "col-md-9 col-lg-9"><h1>Comments:</h1></div>
+                            <div class = "col-md-3 col-lg-3"><h4>Item Description: {{request.itemDescription}}</h4></div>
+                            <!-- <div class = "col-md-9 col-lg-9"><h4>{{request.itemDescription}}</h4></div> -->
                         </div>
                         <div class="row">
-                            <div class = "col-md-3 col-lg-3"></div>
-                            <div class = "col-mid-9 col-lg-9">{{teamMember.comments}}</div>
-                        </div>
+                            <div class = "col-md-3 col-lg-3"><h4>Price: {{request.itemPrice}}</h4></div>
+                            <!-- <div class = "col-mid-9 col-lg-9"><h4>{{request.itemPrice}}</h4></div> -->
                     </div>
               </div>
             </div>
         </div>
+
     </body>
      <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script> 
      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.4.0/ui-bootstrap-tpls.min.js"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.4.0/ui-bootstrap.min.js"></script>
      <script src="ngteam.js"></script>
-     <script src="ng-team/developerController.js"></script>
+     <script src="ng-team/browseController.js"></script>
 </html>

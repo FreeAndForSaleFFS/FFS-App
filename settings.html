@@ -1,0 +1,85 @@
+    <!DOCTYPE html>
+    <html>
+    <head> 
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Free and For Sale</title>
+          <!-- Bootstrap Core CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <!-- Custom CSS -->
+        <link href="styles.css" rel="stylesheet">
+        <link href="jquery-ui.css" rel="stylesheet">
+
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script type= "text/javascript" src="myscripts.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+
+    </head>
+     <body ng-app="ngTeam" ng-controller="settingsController">
+         <div>
+          <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">FFS</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li><a href="Browse.html">Browse</a></li>
+                </ul>
+                <form class="navbar-form navbar-left">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="newPost.html"><span class="glyphicon glyphicon-plus"></span></a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-user"></span></a></li>
+                    <li class="active"><a href="settings.html"><span class="glyphicon glyphicon-cog"></span></a></li>
+                    <li><a href="index.html"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+         </div>
+         
+    
+        <div class="settings-page" ng-repeat = "a in usersData">
+            <div class ="left-column">
+                <h2>Settings</h2>
+                <p>First Name</p>
+                <p>Last Name</p>
+                <p>Contact</p>
+            </div>
+            
+            <div class = "middle-column" >
+                <br>
+                <br>
+                <br>
+                <input id="firstName" type="text" placeholder= {{a.fullname}} />
+                <input id="lastName" type="text"/>
+                <input id="contact" type="text"/>
+                <p>Contact Email:</p>
+                <input id="contactEmail" type="text"/>
+                
+            </div>
+        </div>
+         
+  
+
+    </body>
+         <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script> 
+         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.4.0/ui-bootstrap-tpls.min.js"></script>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.4.0/ui-bootstrap.min.js"></script>
+         <script src="ngsettings.js"></script>
+         <script src="ng-team/settingsController.js"></script>
+    </html>
