@@ -36,7 +36,7 @@
         </div>
 
         <div id="usertable">
-            <div class="panel-body" ng-repeat="request in buyRequestData">
+            <div class="panel-body" ng-repeat="(key,request) in buyRequestData|asArray|filter:searchBy">
               <div class="row">
                 <div class="col-md-3 col-lg-3 " align="center"> <img class = "users" alt="User Pic" src={{request.imageLink}}> </div>
                     <div class=" col-md-3 col-lg-3 "> 
@@ -45,7 +45,7 @@
                             <!-- <div class="col-md-6 col-lg-6"><h4>{{request.itemName}}</h4></div> -->
                         </div>
                         <div class="row">
-                            <div class="col-md-6 col-lg-6"><h4>Price Negotiable?: {{request.checked ? "yes" : "no"}}</h4></div>
+                            <div class="col-md-6 col-lg-6"><h4>Negotiable?: {{request.checked ? "yes" : "no"}}</h4></div>
                             <!-- <div class="col-md-6 col-lg-6"><h4>{{request.checked ? "yes" : "no"}}</h4></div> -->
                         </div>
                     </div>
