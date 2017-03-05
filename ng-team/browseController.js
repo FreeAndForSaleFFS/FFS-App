@@ -15,13 +15,11 @@ angular
          data[tmp[0]] = tmp[1];
     }
     $scope.searchBy = data.name;
-
     $scope.myBuyRequestData.on('value', function (dataSnapshot) {
       $timeout(function () {
         $scope.buyRequestData = dataSnapshot.val();
       });
     });
-
     $scope.saveMember = function() {
         alert('You have saved: ' + $scope.teammate.name);
     };

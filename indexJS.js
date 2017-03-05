@@ -24,7 +24,7 @@ $(document).ready(function () {
                 return;
             }
             if (password.length < 4) {
-                alert('Please enter a password.');
+                alert('Please enter a valid password.');
                 return;
             }
             // Sign in with email and pass.
@@ -35,7 +35,7 @@ $(document).ready(function () {
                         alert("Please verify e-mail");
                         return;
                     }
-                    window.location.href = "Browse.html";
+                    window.location.href = "Browse.html?";
                 })
                 .catch(function (error) {
                     // Handle Errors here.
