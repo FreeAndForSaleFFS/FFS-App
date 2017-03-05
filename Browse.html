@@ -17,9 +17,9 @@
                     </ul>
                     <form class="navbar-form navbar-left">
                         <div class="input-group">
-                            <input type="text" class="form-control" ng-model="searchBy" placeholder="Search">
+                            <input id = "search" type="text" class="form-control" ng-model="searchBy" placeholder="Search">
                             <div class="input-group-btn">
-                                <button class="btn btn-default" type="submit">
+                                <button id = "searchBtn" class="btn btn-default" type="button">
                                     <i class="glyphicon glyphicon-search"></i>
                                 </button>
                             </div>
@@ -57,12 +57,13 @@
                         <div class="row">
                             <div class = "col-md-3 col-lg-3"><h4>Price: {{request.itemPrice}}</h4></div>
                             <!-- <div class = "col-mid-9 col-lg-9"><h4>{{request.itemPrice}}</h4></div> -->
-                    </div>
-              </div>
+                        </div>
+                  </div>
+                </div>
             </div>
         </div>
-
-    </body>
+     </body>
+     <script type="text/javascript" src = "searchJS.js"></script>
      <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script> 
      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.4.0/ui-bootstrap-tpls.min.js"></script>

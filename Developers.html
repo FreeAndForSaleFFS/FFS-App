@@ -19,7 +19,7 @@
                         <div class="input-group">
                             <input type="text" ng-model="searchBy" class="form-control" placeholder="Search">
                             <div class="input-group-btn">
-                                <button class="btn btn-default" type="submit">
+                                <button ng-click="searchFunc()" class="btn btn-default" type="button">
                                     <i class="glyphicon glyphicon-search"></i>
                                 </button>
                             </div>
@@ -35,7 +35,7 @@
             </nav>
         </div>
         <div id="usertable">
-            <div class="panel-body" ng-repeat="teamMember in teammatesData | filter:searchBy">
+            <div class="panel-body" ng-repeat="teamMember in teammatesData">
               <div class="row">
                 <div class="col-md-3 col-lg-3 " align="center"> <img class = "users" alt="User Pic" src={{teamMember.image}}> </div>
                     <div class=" col-md-3 col-lg-3 "> 
@@ -62,7 +62,6 @@
             </div>
         </div>
     </body>
-     <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script> 
      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.4.0/ui-bootstrap-tpls.min.js"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.4.0/ui-bootstrap.min.js"></script>

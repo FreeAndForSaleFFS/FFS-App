@@ -3,7 +3,6 @@ angular
     .module('ngTeam')
     .controller('teamController', function ($scope, $timeout) {
         'use strict';
-        $scope.myData = new Firebase("https://cse110project-1c2dc.firebaseio.com/");
         $scope.teammate = {};
         $scope.teammatesData = [
         {
@@ -66,25 +65,11 @@ angular
             title: "Business Analyst",
             comments: "This was undoubtably my favorite class at UCSD."
         }];
-    /*
-        $scope.myTeammateData = new Firebase("https://cse110project-1c2dc.firebaseio.com/teammates");
-        $scope.myTeammateData.on('value', function (dataSnapshot) {
-            $timeout(function () {
-                $scope.teammatesData = dataSnapshot.val();
-            });
-        }); */
-        $scope.saveMember = function () {
-            alert('You have saved: ' + $scope.teammate.name);
-            var teammateRef, entryKey;
-            /*Creates a ref to the teammates table of the database*/
-            teammateRef = $scope.myData.child("teammates");
-            /*Use this for your key to enter data*/
-            entryKey = $scope.teammate.name;
-            teammateRef.child(entryKey).set($scope.teammate);
-            /*Will erase the fields on the screen containing the name and age*/
-            $scope.teammate.name = "";
-            $scope.teammate.full_name = "";
-            $scope.teammate.age = 0;
+        $scope.searchFunc = function () {
+            var b = $scope.searchBy,
+                url = 'Browse.html?name=' + encodeURIComponent(b);
+            console.log(url);
+            window.location.href = url;
         };
     });
           
