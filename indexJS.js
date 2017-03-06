@@ -9,6 +9,7 @@ $(document).ready(function () {
         storageBucket: "free-and-for-sale-8f8a4.appspot.com",
         messagingSenderId: "29173486724"
     };
+    var file = "";
     firebase.initializeApp(config);
     function toggleSignIn() {
         if (firebase.auth().currentUser) {
@@ -69,8 +70,11 @@ $(document).ready(function () {
     }
     
     function handleSignUp() {
-        var fullname = document.getElementById('signUpName').value;
+        var firstname = document.getElementById('signUpFirstName').value;
+        var lastname = document.getElementById('signUpLastName').value;
         var email = document.getElementById('signUpEmail').value;
+        var contactemail = document.getElementById('signUpContactEmail').value;
+        var contactnumber = document.getElementById('signUpContactNumber').value;
         var password = document.getElementById('signUpPassword').value;
         var confirmpassword = document.getElementById('signUpConfirmPassword').value;
         if (email.length < 4) {
@@ -89,7 +93,7 @@ $(document).ready(function () {
             alert('The two passwords input are not the same!');
             return;
         }
-
+        var userimage = "http://www.murketing.com/journal/wp-content/uploads/2009/04/vimeo.jpg";
         // Sign in with email and pass.
         // [START createwithemail]
         firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -97,7 +101,22 @@ $(document).ready(function () {
                 //signup_success = true;
                 alert('A link has been sent to your e-mail to verify your account');
                 sendEmailVerification();
-                writeUserData(user.uid, fullname, email);
+                if (file != "") {
+                    console.log("hahah");
+                    var imgLink = "";
+                    var storagelink = firebase.storage().ref('userImages/' + file.name);
+                    var uploadTask = storagelink.put(file);
+                    uploadTask.on('state_changed', function(snapshot){
+                    }, function(error) {
+                    }, function() {
+                        userimage = uploadTask.snapshot.downloadURL;
+                        console.log("haha" + userimage);
+                        writeUserData(user.uid, firstname, lastname, email,contactemail,contactnumber,userimage);
+                    });
+                }
+                else {
+                    writeUserData(user.uid, firstname, lastname, email,contactemail,contactnumber,userimage);
+                }
             })
             .catch(function(error) {
                 // Handle Errors here.
@@ -141,11 +160,15 @@ $(document).ready(function () {
       // [END sendpasswordemail];
     }
     
-    function writeUserData(userId, name, email) {
+    function writeUserData(userId, firstname, lastname, email,contactemail,contactnumber,userImage) {
         firebase.database().ref('users/' + userId).set(
             {
-                fullname: name,
-                email: email
+                firstName: firstname,
+                lastName: lastname,
+                email: email,
+                contactEmail: contactemail,
+                contactNumber: contactnumber,
+                userImageLink: userImage              
             },
             function (onComplete) {
                 window.location.href = "index.html";
@@ -157,5 +180,10 @@ $(document).ready(function () {
     document.getElementById('signInButton').addEventListener('click', toggleSignIn);
     document.getElementById('signUpButton').addEventListener('click', handleSignUp);
     document.getElementById('forgotButton').addEventListener('click', sendPasswordReset);
+    var fileButton = document.getElementById('fileButton');
+    fileButton.addEventListener('change', function(e){
+        //Get File
+        file = e.target.files[0];
+    });
     
 }());

@@ -4,17 +4,33 @@
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <title>Team Members</title>
         <link href="styles.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body ng-app="ngTeam" ng-controller="teamController">
         <div id="developerNavbar">
             <nav class="navbar navbar-default navbar-fixed-top">
                 <div class="container-fluid">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="Developers.html">FFS</a>
+                        
+                        
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        
+                        <a class="navbar-brand" href="#">FFS</a>
                     </div>
+                    
+                    <div id="navbar" class="navbar-collapse collapse">
+
                     <ul class="nav navbar-nav">
+                        
                         <li><a href="Browse.html?">Browse</a></li>
                     </ul>
+
                     <form class="navbar-form navbar-left">
                         <div class="input-group">
                             <input type="text" ng-model="searchBy" class="form-control" placeholder="Search">
@@ -25,42 +41,53 @@
                             </div>
                         </div>
                     </form>
+                        
                     <ul class="nav navbar-nav navbar-right">
+                        
                         <li><a href="newPost.html"><span class="glyphicon glyphicon-plus"></span></a></li>
                         <li><a href="#"><span class="glyphicon glyphicon-user"></span></a></li>
+
                         <li><a href="settings.html"><span class="glyphicon glyphicon-cog"></span></a></li>
-                        <li><a href="index.html"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                        <li><a href="index.html"><span class="glyphicon glyphicon-log-out"></span> </a></li>             
+                        
                     </ul>
+                    </div>
                 </div>
             </nav>
         </div>
         <div id="usertable">
-            <div class="panel-body" ng-repeat="teamMember in teammatesData">
+            <div class="panel-body" ng-repeat="teamMember in teammatesData" style="min-width: 300px">
               <div class="row">
-                <div class="col-md-3 col-lg-3 " align="center"> <img class = "users" alt="User Pic" src={{teamMember.image}}> </div>
-                    <div class=" col-md-3 col-lg-3 "> 
-                        <div class="row">
-                            <div class="col-md-6 col-lg-6"><h3>Name:</h3></div>
-                            <div class="col-md-6 col-lg-6"><h3>{{teamMember.name}}</h3></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 col-lg-6"><h3>Positon:</h3></div>
-                            <div class="col-md-6 col-lg-6"><h3>{{teamMember.title}}</h3></div>
-                        </div>
+                <div class="col-md-3 col-lg-3 " align="center" style="min-width: 230px"> 
+                    <img class = "users" alt="User Pic" src={{teamMember.image}}> </div>
+                <div class=" col-md-3 col-lg-3 "> 
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6"><h3><b>Name:</b></h3></div>
+                        <div class="col-md-6 col-lg-6"><h4>{{teamMember.name}}</h4></div>
                     </div>
-                    <div class="col-md-3 col-lg-3 comments"> 
-                        <div class="row">
-                            <div class = "col-md-3 col-lg-3"></div>
-                            <div class = "col-md-9 col-lg-9"><h1>Comments:</h1></div>
-                        </div>
-                        <div class="row">
-                            <div class = "col-md-3 col-lg-3"></div>
-                            <div class = "col-mid-9 col-lg-9">{{teamMember.comments}}</div>
-                        </div>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6"><h3><b>Positon:</b></h3></div>
+                        <div class="col-md-6 col-lg-6"><h4>{{teamMember.title}}</h4></div>
                     </div>
+                </div>
+                <div class="col-md-3 col-lg-3 comments"> 
+                    <div class="row">
+                        <div class = "col-md-3 col-lg-3"></div>
+                        <div class = "col-md-9 col-lg-9" style="min-width: 300px"><h3><b>Comments:</b></h3></div>
+                    </div>
+                    <div class="row">
+                        <div class = "col-md-3 col-lg-3"></div>
+                        <div class = "col-mid-9 col-lg-9" style="min-width: 300px"><h4>{{teamMember.comments}}</h4></div>
+                    </div>
+                </div>
               </div>
             </div>
         </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
     </body>
      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.4.0/ui-bootstrap-tpls.min.js"></script>

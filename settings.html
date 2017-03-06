@@ -19,40 +19,61 @@
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script type= "text/javascript" src="myscripts.js"></script>
         <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
 
     </head>
      <body ng-app="ngTeam" ng-controller="settingsController">
-         <div>
-          <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="Developers.html">FFS</a>
-                </div>
-                <ul class="nav navbar-nav">
-                    <li><a href="Browse.html?">Browse</a></li>
-                </ul>
-                <form class="navbar-form navbar-left">
-                    <div class="input-group">
-                        <input id = "search" type="text" class="form-control" placeholder="Search">
-                        <div class="input-group-btn">
-                            <button id="searchBtn" class="btn btn-default" type="button">
-                                <i class="glyphicon glyphicon-search"></i>
-                            </button>
-                        </div>
+         <div id="developerNavbar">
+            <nav class="navbar navbar-default navbar-fixed-top">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        
+                        
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        
+                        <a class="navbar-brand" href="#">FFS</a>
                     </div>
-                </form>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="newPost.html"><span class="glyphicon glyphicon-plus"></span></a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-user"></span></a></li>
-                    <li class="active"><a href="settings.html"><span class="glyphicon glyphicon-cog"></span></a></li>
-                    <li><a href="index.html"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-                </ul>
-            </div>
-        </nav>
-         </div>
+                    
+                    <div id="navbar" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav">
+                        
+                        <li><a href="Browse.html?">Browse</a></li>
+                    </ul>
+
+                    <form class="navbar-form navbar-left">
+                        <div class="input-group">
+                            <input type="text" ng-model="searchBy" class="form-control" placeholder="Search">
+                            <div class="input-group-btn">
+                                <button ng-click="searchFunc()" class="btn btn-default" type="button">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                        
+                    <ul class="nav navbar-nav navbar-right">
+                        
+                        <li><a href="newPost.html"><span class="glyphicon glyphicon-plus"></span></a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-user"></span></a></li>
+
+                        <li><a href="settings.html"><span class="glyphicon glyphicon-cog"></span></a></li>
+                        <li><a href="index.html"><span class="glyphicon glyphicon-log-out"></span> </a></li>             
+                        
+                    </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
          
     
-        <div class="settings-page" ng-repeat = "a in usersData">
+        <div class="settings-page">
             <div class ="left-column">
                 <h2>Settings</h2>
                 <p>First Name</p>
@@ -60,12 +81,12 @@
                 <p>Contact</p>
             </div>
             
-            <div class = "middle-column" >
+            <div class = "middle-column">
                 <br>
                 <br>
                 <br>
-                <input id="firstName" type="text" placeholder= {{a.fullname}} />
-                <input id="lastName" type="text"/>
+                <input id="firstName" type="text" placeholder= {{currUser.firstName}} />
+                <input id="lastName" type="text" />
                 <input id="contact" type="text"/>
                 <p>Contact Email:</p>
                 <input id="contactEmail" type="text"/>
@@ -76,11 +97,12 @@
   
 
     </body>
-         <script type="text/javascript" src = "searchJS.js"></script>
-         <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script> 
-         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
-         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.4.0/ui-bootstrap-tpls.min.js"></script>
-         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.4.0/ui-bootstrap.min.js"></script>
-         <script src="ngsettings.js"></script>
-         <script src="ng-team/settingsController.js"></script>
+        <script type="text/javascript" src = "searchJS.js"></script>
+        <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script> 
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.4.0/ui-bootstrap-tpls.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.4.0/ui-bootstrap.min.js"></script>
+        <script src="ngsettings.js"></script>
+        <script src="ng-team/settingsController.js"></script>
+        <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     </html>

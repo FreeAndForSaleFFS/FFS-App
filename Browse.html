@@ -4,60 +4,90 @@
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <title>Browse Page</title>
         <link href="styles.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body ng-app="ngTeam" ng-controller="browseController">
         <div id="developerNavbar">
             <nav class="navbar navbar-default navbar-fixed-top">
                 <div class="container-fluid">
                     <div class="navbar-header">
+                        
+                        
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        
                         <a class="navbar-brand" href="Developers.html">FFS</a>
                     </div>
+                    
+                    <div id="navbar" class="navbar-collapse collapse">
+
                     <ul class="nav navbar-nav">
+                        
                         <li class="active"><a href="Browse.html?">Browse</a></li>
                     </ul>
+
                     <form class="navbar-form navbar-left">
                         <div class="input-group">
-                            <input id = "search" type="text" class="form-control" ng-model="searchBy" placeholder="Search">
+                            <input type="text" ng-model="searchBy" class="form-control" placeholder="Search">
                             <div class="input-group-btn">
-                                <button id = "searchBtn" class="btn btn-default" type="button">
+                                <button ng-click="searchFunc()" class="btn btn-default" type="button">
                                     <i class="glyphicon glyphicon-search"></i>
                                 </button>
                             </div>
                         </div>
                     </form>
+                        
                     <ul class="nav navbar-nav navbar-right">
+                        
                         <li><a href="newPost.html"><span class="glyphicon glyphicon-plus"></span></a></li>
                         <li><a href="#"><span class="glyphicon glyphicon-user"></span></a></li>
+
                         <li><a href="settings.html"><span class="glyphicon glyphicon-cog"></span></a></li>
-                        <li><a href="index.html"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                        <li><a href="index.html"><span class="glyphicon glyphicon-log-out"></span> </a></li>             
+                        
                     </ul>
+                    </div>
                 </div>
             </nav>
         </div>
-
+        
+        <div id = "Sorting">
+            <div id = "BuyOrSell">
+                    <button type ="button" id="browseBuyButton" ng-model = "buyButton" ng-click = "buy()" class= "browseButtons">BUY</button>
+                    <button type ="button" id="browseSellButton" ng-model = "sellButton" ng-click = "sell()" class = "browseButtons">SELL</button>
+            </div>
+        </div>
+        
         <div id="usertable">
-            <div class="panel-body" ng-repeat="(key,request) in buyRequestData|asArray|filter:searchBy">
+            <div class="panel-body" ng-repeat="(key,request) in requestData|asArray|filter:{itemName :searchBy}|orderBy:predicate" style="min-width: 300px">
               <div class="row">
-                <div class="col-md-3 col-lg-3 " align="center"> <img class = "users" alt="User Pic" src={{request.imageLink}}> </div>
-                    <div class=" col-md-3 col-lg-3 "> 
-                        <div class="row">
-                            <div class="col-md-6 col-lg-6"><h4>Item Name: {{request.itemName}}</h4></div>
+                <div class="col-md-3 col-lg-3 " align="center" style="min-width: 230px"> 
+                    <img class = "users" alt="User Pic" src={{request.imageLink}}> 
+                </div>
+                <div class=" col-md-3 col-lg-3 "> 
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6" style="min-width: 200px"><h4><b>Item Name:</b> {{request.itemName}}</h4></div>
                             <!-- <div class="col-md-6 col-lg-6"><h4>{{request.itemName}}</h4></div> -->
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 col-lg-6"><h4>Negotiable?: {{request.checked ? "yes" : "no"}}</h4></div>
-                            <!-- <div class="col-md-6 col-lg-6"><h4>{{request.checked ? "yes" : "no"}}</h4></div> -->
-                        </div>
                     </div>
-                    <div class="col-md-3 col-lg-3 comments"> 
-                        <div class="row">
-                            <div class = "col-md-3 col-lg-3"><h4>Item Description: {{request.itemDescription}}</h4></div>
-                            <!-- <div class = "col-md-9 col-lg-9"><h4>{{request.itemDescription}}</h4></div> -->
-                        </div>
-                        <div class="row">
-                            <div class = "col-md-3 col-lg-3"><h4>Price: {{request.itemPrice}}</h4></div>
-                            <!-- <div class = "col-mid-9 col-lg-9"><h4>{{request.itemPrice}}</h4></div> -->
-                        </div>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6" style="min-width: 200px"><h4><b>Negotiable: </b> {{request.checked ? "yes" : "no"}}</h4></div>
+                        <!-- <div class="col-md-6 col-lg-6"><h4>{{request.checked ? "yes" : "no"}}</h4></div> -->
+                    </div>
+                </div>
+                <div class="col-md-3 col-lg-3 comments"> 
+                    <div class="row">
+                        <div class = "col-md-3 col-lg-3" style="min-width: 300px"><h4><b>Item Description:</b> {{request.itemDescription}}</h4></div>
+                        <!-- <div class = "col-md-9 col-lg-9"><h4>{{request.itemDescription}}</h4></div> -->
+                    </div>
+                    <div class="row">
+                        <div class = "col-md-3 col-lg-3" style="min-width: 300px"><h4><b>Price:</b> ${{request.itemPrice}}</h4></div>
+                        <!-- <div class = "col-mid-9 col-lg-9"><h4>{{request.itemPrice}}</h4></div> -->
+                    </div>
                   </div>
                 </div>
             </div>
@@ -70,4 +100,5 @@
      <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.4.0/ui-bootstrap.min.js"></script>
      <script src="ngteam.js"></script>
      <script src="ng-team/browseController.js"></script>
+     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
 </html>

@@ -39,7 +39,12 @@ $(document).ready(function () {
                 firebase.database().ref('posts/BuyRequests/' + entryKey).set(
                     post,
                     function (onComplete) {
-                        window.location.href = "Browse.html?";
+                        firebase.database().ref('posts/Buy/' + post.category + '/' +  entryKey).set(
+                            post,
+                            function (onComplete) {
+                                window.location.href = "Browse.html?";
+                            }
+                        );
                     }
                 );
             });
@@ -60,7 +65,12 @@ $(document).ready(function () {
             firebase.database().ref('posts/BuyRequests/' + entryKey).set(
                 post,
                 function (onComplete) {
-                    window.location.href = "Browse.html?";
+                    firebase.database().ref('posts/Buy/' + post.category + '/' +  entryKey).set(
+                        post,
+                        function (onComplete) {
+                            window.location.href = "Browse.html?";
+                        }
+                    );
                 }
             );
         }
@@ -90,7 +100,12 @@ $(document).ready(function () {
                 firebase.database().ref('posts/SellRequests/' + entryKey).set(
                     post,
                     function (onComplete) {
-                        window.location.href = "Browse.html?";
+                        firebase.database().ref('posts/Sell/' + post.category + '/' +  entryKey).set(
+                            post,
+                            function (onComplete) {
+                                window.location.href = "Browse.html?";
+                            }
+                        );
                     }
                 );
             });
@@ -111,9 +126,15 @@ $(document).ready(function () {
             firebase.database().ref('posts/SellRequests/' + entryKey).set(
                 post,
                 function (onComplete) {
-                    window.location.href = "Browse.html?";
+                    firebase.database().ref('posts/Sell/' + post.category + '/' +  entryKey).set(
+                        post,
+                        function (onComplete) {
+                            window.location.href = "Browse.html?";
+                        }
+                    );
                 }
             );
+            
         }
     }
     
