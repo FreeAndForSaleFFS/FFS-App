@@ -39,16 +39,12 @@ $(document).ready(function () {
                 firebase.database().ref('posts/BuyRequests/' + entryKey).set(
                     post,
                     function (onComplete) {
-<<<<<<< HEAD
                         firebase.database().ref('posts/Buy/' + post.category + '/' +  entryKey).set(
                             post,
                             function (onComplete) {
                                 window.location.href = "Browse.html?";
                             }
                         );
-=======
-                        window.location.href = "Browse.html";
->>>>>>> origin/master
                     }
                 );
             });
@@ -69,16 +65,12 @@ $(document).ready(function () {
             firebase.database().ref('posts/BuyRequests/' + entryKey).set(
                 post,
                 function (onComplete) {
-<<<<<<< HEAD
                     firebase.database().ref('posts/Buy/' + post.category + '/' +  entryKey).set(
                         post,
                         function (onComplete) {
                             window.location.href = "Browse.html?";
                         }
                     );
-=======
-                    window.location.href = "Browse.html";
->>>>>>> origin/master
                 }
             );
         }
@@ -108,16 +100,12 @@ $(document).ready(function () {
                 firebase.database().ref('posts/SellRequests/' + entryKey).set(
                     post,
                     function (onComplete) {
-<<<<<<< HEAD
                         firebase.database().ref('posts/Sell/' + post.category + '/' +  entryKey).set(
                             post,
                             function (onComplete) {
                                 window.location.href = "Browse.html?";
                             }
                         );
-=======
-                        window.location.href = "Browse.html";
->>>>>>> origin/master
                     }
                 );
             });
@@ -138,16 +126,12 @@ $(document).ready(function () {
             firebase.database().ref('posts/SellRequests/' + entryKey).set(
                 post,
                 function (onComplete) {
-<<<<<<< HEAD
                     firebase.database().ref('posts/Sell/' + post.category + '/' +  entryKey).set(
                         post,
                         function (onComplete) {
                             window.location.href = "Browse.html?";
                         }
                     );
-=======
-                    window.location.href = "Browse.html";
->>>>>>> origin/master
                 }
             );
             
