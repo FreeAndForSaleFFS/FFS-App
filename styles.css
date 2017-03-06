@@ -141,7 +141,7 @@ body {
   font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;   
-  min-width: 700px;   
+  min-width: 500px;   
 }
 #uploader {
     -webkit-appearance: none;

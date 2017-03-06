@@ -4,6 +4,9 @@ angular
 .controller('browseController', function ($scope, $timeout) {
 
     'use strict';
+    //maximum amount of posts per page at page start.
+    var postsLimit = 2;
+
     var urlCheck = document.location.href;
     if(urlCheck.includes("?")) {
        var url = document.location.href,
@@ -31,6 +34,7 @@ angular
     });
     
     $scope.buy = function() {
+        $scope.limit = 2;
         $scope.myRequestData = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/BuyRequests");
         console.log("buy");
         $scope.myRequestData.on('value', function (dataSnapshot) {
@@ -43,6 +47,7 @@ angular
         });
     };
     $scope.sell = function() {
+        $scope.limit = 2;
         $scope.myRequestData = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/SellRequests");
         console.log("sell");
         $scope.myRequestData.on('value', function (dataSnapshot) {
@@ -55,4 +60,10 @@ angular
         });
     };
 
+    $scope.limit = postsLimit;
+
+    $scope.incrementLimit = function() {
+        $scope.limit += postsLimit;
+        console.log(postsLimit);
+    };
 });

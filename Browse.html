@@ -64,7 +64,7 @@
         </div>
         
         <div id="usertable">
-            <div class="panel-body" ng-repeat="(key,request) in requestData|asArray|filter:{itemName :searchBy}|orderBy:predicate" style="min-width: 300px">
+            <div class="panel-body" ng-repeat="(key,request) in requestData|asArray|filter:{itemName :searchBy}|orderBy:predicate|limitTo:limit" style="min-width: 300px">
               <div class="row">
                 <div class="col-md-3 col-lg-3 " align="center" style="min-width: 230px"> 
                     <img class = "users" alt="User Pic" src={{request.imageLink}}> 
@@ -90,6 +90,9 @@
                     </div>
                   </div>
                 </div>
+            </div>
+            <div style="text-align:center">
+                <button type ="button" ng-click = "incrementLimit()" class= "browseButtons">Load 2 more items.</button>
             </div>
         </div>
      </body>
