@@ -34,7 +34,7 @@ angular
     });
     
     $scope.buy = function() {
-        $scope.limit = 2;
+        $scope.limit = postsLimit;
         $scope.myRequestData = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/BuyRequests");
         console.log("buy");
         $scope.myRequestData.on('value', function (dataSnapshot) {
@@ -47,7 +47,7 @@ angular
         });
     };
     $scope.sell = function() {
-        $scope.limit = 2;
+        $scope.limit = postsLimit;
         $scope.myRequestData = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/SellRequests");
         console.log("sell");
         $scope.myRequestData.on('value', function (dataSnapshot) {
