@@ -5,7 +5,7 @@ angular
 
     'use strict';
     //maximum amount of posts per page at page start.
-    var postsLimit = 2;
+    var postsLimit = 5;
 
     var urlCheck = document.location.href;
     if(urlCheck.includes("?")) {
