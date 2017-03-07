@@ -13,7 +13,6 @@
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <!-- Custom CSS -->
         <link href="styles.css" rel="stylesheet">
-        <link href="jquery-ui.css" rel="stylesheet">
 
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -49,9 +48,9 @@
 
                     <form class="navbar-form navbar-left">
                         <div class="input-group">
-                            <input type="text" ng-model="searchBy" class="form-control" placeholder="Search">
+                            <input type="text" ng-model="searchBy" id = "search" class="form-control" placeholder="Search">
                             <div class="input-group-btn">
-                                <button ng-click="searchFunc()" class="btn btn-default" type="button">
+                                <button ng-click="searchFunc()" id = "searchBtn" class="btn btn-default" type="button">
                                     <i class="glyphicon glyphicon-search"></i>
                                 </button>
                             </div>
@@ -64,7 +63,7 @@
                         <li><a href="#"><span class="glyphicon glyphicon-user"></span></a></li>
 
                         <li><a href="settings.html"><span class="glyphicon glyphicon-cog"></span></a></li>
-                        <li><a href="index.html"><span class="glyphicon glyphicon-log-out"></span> </a></li>             
+                        <li><a ng-model="logoutLink" ng-click = "logoutAndLink()"><span class="glyphicon glyphicon-log-out"></span> </a></li>             
                         
                     </ul>
                     </div>

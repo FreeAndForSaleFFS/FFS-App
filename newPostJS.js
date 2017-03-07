@@ -137,6 +137,23 @@ $(document).ready(function () {
             
         }
     }
+    function logout() {
+        if (firebase.auth().currentUser) {
+            // [START signout]
+            firebase.auth().signOut();
+            // [END signout]
+        }
+    }
+    function logoutAndLink() {
+        logout();
+        //window.location.href = "index.html";
+    }
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (!user) {
+            window.location.href = "index.html";
+        }
+    });
+    document.getElementById('logoutLink').addEventListener('click', logoutAndLink);
     
     var buyButton = document.getElementById('newBuyButton');
     var sellButton = document.getElementById('newSellButton');

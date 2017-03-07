@@ -12,6 +12,17 @@ angular
     };
     firebase.initializeApp(config);
     var uid;
+    function logout() {
+        if (firebase.auth().currentUser) {
+            // [START signout]
+            firebase.auth().signOut();
+            // [END signout]
+        }
+    }
+    $scope.logoutAndLink = function() {
+        logout();
+        //window.location.href = "index.html";
+    };
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
             var uid = user.uid;
@@ -25,6 +36,9 @@ angular
                    $scope.currUser = dataSnapShot.val();
                }); 
             });
+        }
+        else {
+            window.location.href="index.html";
         }
     });  
 });
