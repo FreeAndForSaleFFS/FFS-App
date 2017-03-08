@@ -10,7 +10,7 @@ angular
         storageBucket: "free-and-for-sale-8f8a4.appspot.com",
         messagingSenderId: "29173486724"
     };
-    firebase.initializeApp(config);
+    firebase.initializeApp(config, "Secondary");
     var uid;
     function logout() {
         if (firebase.auth().currentUser) {
@@ -27,7 +27,6 @@ angular
         if (user) {
             var uid = user.uid;
             $scope.uid = user.uid;
-            console.log($scope.uid);
             var myUserRef = "https://free-and-for-sale-8f8a4.firebaseio.com/users/" + uid; 
             $scope.myCurrUserData = new Firebase(myUserRef);
             $scope.currUser = {};

@@ -1,4 +1,4 @@
-/*global $,firebase,Firebase,console,alert*/
+/*global $, firebase ,Firebase,console,alert*/
 $(document).ready(function () {
     "use strict";
     // Initialize Firebase
@@ -12,21 +12,36 @@ $(document).ready(function () {
     firebase.initializeApp(config);
     var database = firebase.database();
     function updateFirstName() {
-        alert('Hi');
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                var uid = user.uid;
+                var newFirstName = document.getElementById('firstName').value;
+                var myUserRef = "https://free-and-for-sale-8f8a4.firebaseio.com/users/" + uid;
+                var myUserFireBase = new Firebase(myUserRef);
+                myUserFireBase.update({"firstName": newFirstName});
+            }
+        });
     }
     function updateLastName() {
-        alert('Hi');
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                var uid = user.uid;
+                var newLastName = document.getElementById('lastName').value;
+                var myUserRef = "https://free-and-for-sale-8f8a4.firebaseio.com/users/" + uid;
+                var myUserFireBase = new Firebase(myUserRef);
+                myUserFireBase.update({"lastName": newLastName});
+            }
+        });
     }
 
     function updateEmail() {
-        alert('Hi');
-
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
                 var uid = user.uid;
                 var newEmail = document.getElementById('contactEmail').value;
-                firebase.child("users").child(uid).updateChildValues(["email": newEmail]);
-                
+                var myUserRef = "https://free-and-for-sale-8f8a4.firebaseio.com/users/" + uid;
+                var myUserFireBase = new Firebase(myUserRef);
+                myUserFireBase.update({"contactEmail": newEmail});
             }
         });
     }
