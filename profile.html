@@ -1,13 +1,125 @@
 <!DOCTYPE html>
-<html>
-    <head> 
-        <title>Free and For Sale</title>
-        <link rel="stylesheet" href="styles.css">
-        <script src="myscripts.js"></script>
+ <html>
+    <head>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <title>Profile Page</title>
+        <link href = "profile.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
     </head>
-    <body>
-        <div class="profile-page">
-            <h1>You've logged in</h1>
+    <body ng-app="ngTeam" ng-controller="profileController">
+        <div id="developerNavbar">
+            <nav class="navbar navbar-default navbar-fixed-top">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="Developers.html">FFS</a>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="Browse.html?">Browse</a></li>
+                    </ul>
+                    <form class="navbar-form navbar-left">
+                        <div class="input-group">
+                            <input type="text" ng-model="searchBy" class="form-control" placeholder="Search">
+                            <div class="input-group-btn">
+                                <button ng-click="searchFunc()" class="btn btn-default" type="button">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="newPost.html"><span class="glyphicon glyphicon-plus"></span></a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-user"></span></a></li>
+                        <li><a href="settings.html"><span class="glyphicon glyphicon-cog"></span></a></li>
+                        <li><a id = "logoutLink"><span class="glyphicon glyphicon-log-out"></span> </a></li>             
+                    </ul>
+                    </div>
+                </div>
+            </nav>
         </div>
-    </body>
+        
+        <div id = "profileContainer" class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" > 
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{user.firstName}} {{user.lastName}}</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src={{user.userImageLink}} class="img-circle img-responsive"> </div>
+                                <div class=" col-md-9 col-lg-9 "> 
+                                    <table class="table table-user-information">
+                                        <tbody>
+                                            <tr>
+                                                <td>UCSD Email:</td>
+                                                <td>{{user.email}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Contact Email:</td>
+                                                <td>{{user.contactEmail}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Phone Number:</td>
+                                                <td>{{user.contactNumber}}</td>
+                                            </tr>
+                                         <!--   <tr>
+                                                <td>Date of Birth</td>
+                                                <td>01/24/1988</td>
+                                            </tr>
+                    
+                                            <tr>
+                                                <td>Gender</td>
+                                                <td>Female</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Home Address</td>
+                                                <td>Kathmandu,Nepal</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Email</td>
+                                                <td><a href="mailto:info@support.com">info@support.com</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Phone Number</td>
+                                                <td>123-4567-890(Landline)<br><br>555-4567-890(Mobile)
+                                                </td>
+                                            </tr>       -->            
+                     
+                                        </tbody>
+                                    </table>
+                  
+                                    <a href="#" id ="myPosts" class="btn btn-primary">My Posts</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a><label>E-mail</label>
+                            <span class="pull-right">
+                                <label>Rate</label><a href="edit.html" data-original-title="Rate this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
+                            </span>
+                        </div>
+            
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+     </body>
+     <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script> 
+     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.4.0/ui-bootstrap-tpls.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.4.0/ui-bootstrap.min.js"></script>
+     <script src="ngteam.js"></script>
+     <script src="ng-team/profileController.js"></script>
+     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+     <script type="text/javascript" src = "logout.js"></script>
 </html>

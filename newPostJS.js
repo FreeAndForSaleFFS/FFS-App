@@ -1,4 +1,4 @@
-/*global $,firebase,console,alert,signup_success, writeUserData,prompt*/
+/*global $,Firebase,firebase,console,alert,signup_success, writeUserData,prompt*/
 $(document).ready(function () {
     "use strict";
 // Initialize Firebase
@@ -13,6 +13,9 @@ $(document).ready(function () {
     
     var postImage = "https://pbs.twimg.com/profile_images/730145978590867460/ZFbNoKhD.jpg";
     var file ="";
+    var userId = "";
+    var userFirstName = "";
+    var userLastName = "";
     
     function writeBuyPost() { 
         var postRef, categoryRef, entryKey;
@@ -34,6 +37,9 @@ $(document).ready(function () {
                 post.itemDescription = document.getElementById('newItemDescription').value;
                 post.category = document.getElementById('newItemCategory').value;
                 post.type = "BuyRequest";
+                post.userID = userId;
+                post.firstName = userFirstName;
+                post.lastName = userLastName;
                 entryKey = post.itemName;
                 console.log(post.itemName);
                 firebase.database().ref('posts/BuyRequests/' + entryKey).set(
@@ -60,6 +66,9 @@ $(document).ready(function () {
             post.itemDescription = document.getElementById('newItemDescription').value;
             post.category = document.getElementById('newItemCategory').value;
             post.type = "BuyRequest";
+            post.userID = userId;
+            post.firstName = userFirstName;
+            post.lastName = userLastName;
             entryKey = post.itemName;
             console.log(post.itemName);
             firebase.database().ref('posts/BuyRequests/' + entryKey).set(
@@ -95,6 +104,9 @@ $(document).ready(function () {
                 post.itemDescription = document.getElementById('newItemDescription').value;
                 post.category = document.getElementById('newItemCategory').value;
                 post.type = "SellRequest";
+                post.userID = userId;
+                post.firstName = userFirstName;
+                post.lastName = userLastName;
                 entryKey = post.itemName;
                 console.log(post.itemName);
                 firebase.database().ref('posts/SellRequests/' + entryKey).set(
@@ -121,6 +133,9 @@ $(document).ready(function () {
             post.itemDescription = document.getElementById('newItemDescription').value;
             post.category = document.getElementById('newItemCategory').value;
             post.type = "SellRequest";
+            post.userID = userId;
+            post.firstName = userFirstName;
+            post.lastName = userLastName;
             entryKey = post.itemName;
             console.log(post.itemName);
             firebase.database().ref('posts/SellRequests/' + entryKey).set(
@@ -151,6 +166,19 @@ $(document).ready(function () {
     firebase.auth().onAuthStateChanged(function (user) {
         if (!user) {
             window.location.href = "index.html";
+        }
+        else {
+            userId = user.uid;
+            var myUserData = firebase.database().ref('users/'+userId);
+            var userProperties = {};
+            myUserData.on('value', function (dataSnapshot) {
+                userProperties = dataSnapshot.val();
+                console.log("lol");
+                userFirstName = userProperties.firstName;
+                userLastName = userProperties.lastName;
+                console.log(userFirstName);
+                console.log(userLastName);
+            });
         }
     });
     document.getElementById('logoutLink').addEventListener('click', logoutAndLink);
