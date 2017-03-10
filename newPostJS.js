@@ -159,6 +159,9 @@ $(document).ready(function () {
             // [END signout]
         }
     }
+    function profileLink() {
+        window.location.href = "profile.html?name=" + userId;
+    }
     function logoutAndLink() {
         logout();
         //window.location.href = "index.html";
@@ -182,6 +185,7 @@ $(document).ready(function () {
         }
     });
     document.getElementById('logoutLink').addEventListener('click', logoutAndLink);
+    document.getElementById('profileLink').addEventListener('click',profileLink);
     
     var buyButton = document.getElementById('newBuyButton');
     var sellButton = document.getElementById('newSellButton');

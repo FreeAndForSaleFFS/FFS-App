@@ -9,6 +9,7 @@ $(document).ready(function () {
             messagingSenderId: "29173486724"
         };
     firebase.initializeApp(config);
+    var userUID = "";
     function logout() {
         if (firebase.auth().currentUser) {
             // [START signout]
@@ -20,10 +21,17 @@ $(document).ready(function () {
         logout();
         //window.location.href = "index.html";
     }
+    function profileLink() {
+        window.location.href = "profile.html?name=" + userUID;
+    }
     firebase.auth().onAuthStateChanged(function (user) {
         if (!user) {
             window.location.href = "index.html";
         }
+        else {
+            userUID = user.uid;
+        }
     });
     document.getElementById('logoutLink').addEventListener('click', logoutAndLink);
+    document.getElementById('profileLink').addEventListener('click', profileLink);
 });
