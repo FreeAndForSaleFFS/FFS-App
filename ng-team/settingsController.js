@@ -1,28 +1,29 @@
-/*global alert,angular,Firebase,firebase*/
+/*global alert,angular,Firebase,firebase,confirm*/
 angular
     .module('ngTeam')
     .controller('settingsController', function ($scope, $timeout) {
     'use strict';
-    var config = {
-        apiKey: "AIzaSyAekAGq_S1BwZVq9pL-KXhmndvwpm1LyJI",
-        authDomain: "free-and-for-sale-8f8a4.firebaseapp.com",
-        databaseURL: "https://free-and-for-sale-8f8a4.firebaseio.com",
-        storageBucket: "free-and-for-sale-8f8a4.appspot.com",
-        messagingSenderId: "29173486724"
-    };
-    firebase.initializeApp(config, "Secondary");
-    var uid;
-    function logout() {
-        if (firebase.auth().currentUser) {
-            // [START signout]
-            firebase.auth().signOut();
-            // [END signout]
+        var config = {
+            apiKey: "AIzaSyAekAGq_S1BwZVq9pL-KXhmndvwpm1LyJI",
+            authDomain: "free-and-for-sale-8f8a4.firebaseapp.com",
+            databaseURL: "https://free-and-for-sale-8f8a4.firebaseio.com",
+            storageBucket: "free-and-for-sale-8f8a4.appspot.com",
+            messagingSenderId: "29173486724"
+        };
+        firebase.initializeApp(config, "Secondary");
+        var uid;
+        function logout() {
+            if (firebase.auth().currentUser) {
+                // [START signout]
+                firebase.auth().signOut();
+                // [END signout]
+            }
         }
-    }
-    $scope.logoutAndLink = function() {
-        logout();
-        //window.location.href = "index.html";
-    };
+        $scope.logoutAndLink = function () {
+            logout();
+            //window.location.href = "index.html";
+        };
+
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
             var uid = user.uid;
