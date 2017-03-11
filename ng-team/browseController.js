@@ -85,11 +85,11 @@ angular
     
         $scope.sortByDate = function () {
             $scope.predicate = "-time";
-        }
+        };
         
         $scope.sortByPrice = function () {
             $scope.predicate = "-itemPrice";
-        }
+        };
     
         $scope.computeAverage = function () {
             console.log("check");
