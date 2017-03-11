@@ -23,7 +23,7 @@ angular
             console.log("haha" + data.name);
             $scope.searchBy = data.name;
         }
-        $scope.predicate = '-itemPrice';
+        $scope.predicate = '-time';
 
         $scope.myRequestData = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/BuyRequests");
         $scope.requestData = {};
@@ -82,6 +82,14 @@ angular
             $scope.limit += postsLimit;
             console.log(postsLimit);
         };
+    
+        $scope.sortByDate = function () {
+            $scope.predicate = "-time";
+        }
+        
+        $scope.sortByPrice = function () {
+            $scope.predicate = "-itemPrice";
+        }
     
         $scope.computeAverage = function () {
             console.log("check");

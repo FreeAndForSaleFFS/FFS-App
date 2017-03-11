@@ -52,6 +52,13 @@
                     <button type ="button" id="browseSellButton" ng-model = "sellButton" ng-click = "sell()" class = "browseButtons">SELL</button>
             </div>
         </div>
+        <div id = "Sorting2">
+            <div id = "DateOrPrice">
+                    <button type ="button" id="sortByDate" ng-model = "sortDate" ng-click = "sortByDate()" class= "browseButtons2">Sort By Date</button>
+                    <button type ="button" id="sortByPrice" ng-model = "sortPrice" ng-click = "sortByPrice()" class = "browseButtons2">Sort By Price</button>
+            </div>
+        </div>
+        
         
         <div class = "Price-trends">
             <label>Average Price: {{averageValue}}</label>

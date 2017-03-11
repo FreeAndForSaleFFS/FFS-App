@@ -16,10 +16,12 @@ $(document).ready(function () {
     var userId = "";
     var userFirstName = "";
     var userLastName = "";
-    
     function writeBuyPost() { 
         var postRef, categoryRef, entryKey;
         var post = {};
+        var today = new Date();
+        post.time = today.toJSON();
+        console.log(post.time);
         if (file != "") {
             var imgLink = "";
             var storagelink = firebase.storage().ref('postImages/' + file.name);
@@ -87,6 +89,9 @@ $(document).ready(function () {
     function writeSellPost() {
         var postRef, categoryRef, entryKey;
         var post = {};
+        var today = new Date();
+        post.time = today.toJSON();
+        console.log(post.time);
         if (file != "") {
             var imgLink = "";
             var storagelink = firebase.storage().ref('postImages/' + file.name);
