@@ -45,5 +45,53 @@ angular
             $scope.sellRequestData = dataSnapshot.val();
         });
     });
+        $scope.deleteBuyPost = function () {
+        $scope.items={};
+        $scope.itemCategory = "";
+
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                var e = window.event,
+                    btn = e.target || e.srcElement;
+                var itemID = btn.id,
+                    myItemRef = "https://free-and-for-sale-8f8a4.firebaseio.com/posts/BuyRequests/"+itemID;
+                $scope.myItemFirebase = new Firebase(myItemRef);
+                $scope.myItemFirebase.on('value', function (dataSnapshot) {
+                    
+                   
+                        $scope.itemCateogry=dataSnapshot.child("category").val();
+                   
+                });
+
+
+
+                var mySortedItemRef=new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/Buy/" +$scope.itemCategory+"/"+ itemID);
+                    mySortedItemRef.remove();
+                    $scope.myItemFirebase.remove();
+                 location.reload();      
+                }
+            });
+    };
+    $scope.updateBuyPost = function () {
+        $scope.items={};
+        $scope.itemCategory = "";
+
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                var e = window.event,
+                    btn = e.target || e.srcElement;
+                var itemID = btn.id,
+                    myItemRef = "https://free-and-for-sale-8f8a4.firebaseio.com/posts/BuyRequests/"+itemID;
+                $scope.myItemFirebase = new Firebase(myItemRef);
+                $scope.myItemFirebase.on('value', function (dataSnapshot) {    
+                        $scope.itemCateogry=dataSnapshot.child("category").val();
+                   
+                });
+                var mySortedItemRef=new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/Buy/" +$scope.itemCategory+"/"+ itemID);
+
+                 location.reload();      
+                }
+            });
+    };
 
 });

@@ -21,6 +21,7 @@ $(document).ready(function () {
                 myUserFirebase.update({"firstName": newFirstName});
             }
         });
+        location.reload();
     }
     function updateLastName() {
         firebase.auth().onAuthStateChanged(function (user) {
@@ -32,6 +33,7 @@ $(document).ready(function () {
                 myUserFirebase.update({"lastName": newLastName});
             }
         });
+        location.reload();
     }
 
     function updateEmail() {
@@ -44,6 +46,7 @@ $(document).ready(function () {
                 myUserFirebase.update({"contactEmail": newEmail});
             }
         });
+        location.reload();
     }
 
     function updatePassword() {
@@ -113,6 +116,19 @@ $(document).ready(function () {
             alert('Account not deleted');
         }
     }
+     function updateContactNumber() {
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                var uid = user.uid,
+                    newNumber = document.getElementById('contactPhone').value,
+                    myUserRef = "https://free-and-for-sale-8f8a4.firebaseio.com/users/" + uid,
+                    myUserFirebase = new Firebase(myUserRef);
+                myUserFirebase.update({"contactNumber": newNumber});
+            }
+        });
+        location.reload()
+    }
+    document.getElementById('updateContactNumberButton').addEventListener('click',updateContactNumber)
     document.getElementById('deleteAccountButton').addEventListener('click', deleteAccount);
     document.getElementById('resetPasswordButton').addEventListener('click', updatePassword);
     document.getElementById('updateFirstNameButton').addEventListener('click', updateFirstName);
