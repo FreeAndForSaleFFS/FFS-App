@@ -45,9 +45,10 @@ angular
             $scope.sellRequestData = dataSnapshot.val();
         });
     });
-        $scope.deleteBuyPost = function () {
+    $scope.deleteBuyPost = function () {
         $scope.items={};
         $scope.itemCategory = "";
+        $scope.itemUID="";
 
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
@@ -57,39 +58,52 @@ angular
                     myItemRef = "https://free-and-for-sale-8f8a4.firebaseio.com/posts/BuyRequests/"+itemID;
                 $scope.myItemFirebase = new Firebase(myItemRef);
                 $scope.myItemFirebase.on('value', function (dataSnapshot) {
-                    
-                   
-                        $scope.itemCateogry=dataSnapshot.child("category").val();
-                   
+                        $scope.itemCategory=dataSnapshot.child("category").val();
+                        $scope.itemUID = dataSnapshot.child("userID").val();
                 });
-
-
-
-                var mySortedItemRef=new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/Buy/" +$scope.itemCategory+"/"+ itemID);
+                if($scope.itemUID===user.uid){
+                    var mySortedItemRef=new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/Buy/" +$scope.itemCategory+"/"+ itemID);
                     mySortedItemRef.remove();
                     $scope.myItemFirebase.remove();
-                 location.reload();      
+                    location.reload();       
                 }
-            });
+                else{
+                    alert("Action not allowed");
+                }
+
+            }
+        });
+
     };
-    $scope.updateBuyPost = function () {
+    $scope.deleteSellPost = function () {
         $scope.items={};
         $scope.itemCategory = "";
+        $scope.itemUID="";
 
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
                 var e = window.event,
                     btn = e.target || e.srcElement;
                 var itemID = btn.id,
-                    myItemRef = "https://free-and-for-sale-8f8a4.firebaseio.com/posts/BuyRequests/"+itemID;
+                    myItemRef = "https://free-and-for-sale-8f8a4.firebaseio.com/posts/SellRequests/"+itemID;
                 $scope.myItemFirebase = new Firebase(myItemRef);
                 $scope.myItemFirebase.on('value', function (dataSnapshot) {    
-                        $scope.itemCateogry=dataSnapshot.child("category").val();
+                        $scope.itemCategory=dataSnapshot.child("category").val();
+                        $scope.itemUID = dataSnapshot.child("userID").val();
+
                    
                 });
-                var mySortedItemRef=new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/Buy/" +$scope.itemCategory+"/"+ itemID);
+                if($scope.itemUID===user.uid){
 
-                 location.reload();      
+                    var mySortedItemRef=new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/Sell/" +$scope.itemCategory+"/"+ itemID);
+                    mySortedItemRef.remove();
+                    $scope.myItemFirebase.remove();
+                    location.reload(); 
+                }
+                else{
+                    alert("Action not allowed");
+                }
+
                 }
             });
     };
