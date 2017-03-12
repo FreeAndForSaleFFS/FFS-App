@@ -73,28 +73,17 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                  
-                                    <a href="#" id ="myPosts" class="btn btn-primary">My Posts</a>
                                 </div>
                             </div>
                         </div>
                         <div class="panel-footer">
                             <a href = {{"mailto:"+user.contactEmail+"?Subject=Hello%20there!"}} data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a><label>E-mail</label>
-                            <span class="pull-right">
-                                <label>Rate</label><a href="edit.html" data-original-title="Rate this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
-                            </span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div id = "Sorting" style="text-align:center">
-            <div id = "BuyOrSell">
-                    <button type ="button" id="browseBuyButton" ng-model = "buyButton" ng-click = "buy()" class= "browseButtons">BUY</button>
-                    <button type ="button" id="browseSellButton" ng-model = "sellButton" ng-click = "sell()" class = "browseButtons">SELL</button>
-            </div>
-        </div>
-        <label>buy</label>
+        <a href="#" id ="myPosts" class="btn btn-primary" style="margin-left:10px;">I'm currently looking for:</a>
         <div id="usertable">
             <div class="panel-body" ng-repeat="(key,request) in buyRequestData|asArray|filter:{userID:profileuid}" style="min-width: 300px">
               <div class="row">
@@ -116,14 +105,11 @@
                     <div class="row">
                         <div class = "col-md-3 col-lg-3" style="min-width: 300px"><h4><b>Price:</b> ${{request.itemPrice}}</h4></div>
                     </div>
-                    <div class = "row">
-                        <button type ="button" id={{request.itemName}} ng-model = "amazonPrice" ng-click = "amazonPrice()">Check Amazon</button>
-                    </div>
                   </div>
                 </div>
             </div>
         </div>
-        <label>sell</label>
+        <a href="#" id ="myPosts" class="btn btn-primary" style="margin-left:10px;">I'm currently selling:</a>
         <div id="usertable">
             <div class="panel-body" ng-repeat="(key,request) in sellRequestData|asArray|filter:{userID:profileuid}" style="min-width: 300px">
               <div class="row">
@@ -144,9 +130,6 @@
                     </div>
                     <div class="row">
                         <div class = "col-md-3 col-lg-3" style="min-width: 300px"><h4><b>Price:</b> ${{request.itemPrice}}</h4></div>
-                    </div>
-                    <div class = "row">
-                        <button type ="button" id={{request.itemName}} ng-model = "amazonPrice" ng-click = "amazonPrice()">Check Amazon</button>
                     </div>
                   </div>
                 </div>

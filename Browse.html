@@ -22,32 +22,46 @@
                         <a class="navbar-brand" href="Developers.html">FFS</a>
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="Browse.html?">Browse</a></li>
-                        <li class="dropdown">
-                        <a href="https://getbootstrap.com/examples/navbar/#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sort By: <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                          <li><a ng-model = "buyButton" ng-click = "sortByPrice()">Price</a></li>
-                          <li><a ng-model = "buyButton" ng-click = "sortByDate()">Date</a></li>
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="Browse.html?">Browse</a></li>
+                            <li class="dropdown">
+                                <a href="https://getbootstrap.com/examples/navbar/#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sort By: <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a ng-model = "buyButton" ng-click = "sortByPrice()">Price</a></li>
+                                    <li><a ng-model = "buyButton" ng-click = "sortByDate()">Date</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="https://getbootstrap.com/examples/navbar/#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories: {{dataType}} <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a ng-model = "catBooks" ng-click = "setAll()">All</a></li>
+                                    <li><a ng-model = "catBooks" ng-click = "setBooks()">Books</a></li>
+                                    <li><a ng-model = "catNotes" ng-click = "setNotes()">Notes</a></li>
+                                    <li><a ng-model = "catFurniture" ng-click = "setFurniture()">Furniture</a></li>
+                                    <li><a ng-model = "catClothes" ng-click = "setClothes()">Clothes</a></li>
+                                    <li><a ng-model = "catFood" ng-click = "setFood()">Food</a></li>
+                                    <li><a ng-model = "catTechnology" ng-click = "setTechnology()">Technology</a></li>
+                                    <li><a ng-model = "catServices" ng-click = "setServices()">Services</a></li>
+                                    <li><a ng-model = "catOther" ng-click = "setOther()">Other</a></li>
+                                </ul>
+                            </li>
                         </ul>
-                      </li>
-                    </ul>
-                    <form class="navbar-form navbar-left">
-                        <div class="input-group">
-                            <input type="text" ng-model="searchBy" ng-change="computeAverage()" class="form-control" placeholder="Search">
-                            <div class="input-group-btn">
-                                <button ng-click="searchFunc()" class="btn btn-default" type="button">
-                                    <i class="glyphicon glyphicon-search"></i>
-                                </button>
+                        <form class="navbar-form navbar-left">
+                            <div class="input-group">
+                                <input type="text" ng-model="searchBy" ng-change="computeAverage()" class="form-control" placeholder="Search">
+                                <div class="input-group-btn">
+                                    <button ng-click="searchFunc()" class="btn btn-default" type="button">
+                                        <i class="glyphicon glyphicon-search"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    </form>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="newPost.html"><span class="glyphicon glyphicon-plus"></span></a></li>
-                        <li><a id = "profileLink"><span class="glyphicon glyphicon-user"></span></a></li>
-                        <li><a href="settings.html"><span class="glyphicon glyphicon-cog"></span></a></li>
-                        <li><a id = "logoutLink"><span class="glyphicon glyphicon-log-out"></span> </a></li>             
-                    </ul>
+                        </form>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="newPost.html"><span class="glyphicon glyphicon-plus"></span></a></li>
+                            <li><a id = "profileLink"><span class="glyphicon glyphicon-user"></span></a></li>
+                            <li><a href="settings.html"><span class="glyphicon glyphicon-cog"></span></a></li>
+                            <li><a id = "logoutLink"><span class="glyphicon glyphicon-log-out"></span> </a></li>             
+                        </ul>
                     </div>
                 </div>
             </nav>
@@ -55,19 +69,10 @@
         
         <div id = "Sorting" style="text-align: center">
             <div id = "BuyOrSell">
-                    <button type ="button" id="browseBuyButton" ng-model = "buyButton" ng-click = "buy()" class= "browseButtons">BUY</button>
-                    <button type ="button" id="browseSellButton" ng-model = "sellButton" ng-click = "sell()" class = "browseButtons">SELL</button>
+                    <button type ="button" id="browseBuyButton" ng-model = "buyButton" ng-click = "buy()" class= "browseButtons">Currently being seeked</button>
+                    <button type ="button" id="browseSellButton" ng-model = "sellButton" ng-click = "sell()" class = "browseButtons">Currently on Sale</button>
             </div>
         </div>
-        <!--
-        <div id = "Sorting2">
-            <div id = "DateOrPrice">
-                    <button type ="button" id="sortByDate" ng-model = "sortDate" ng-click = "sortByDate()" class= "browseButtons2">Sort By Date</button>
-                    <button type ="button" id="sortByPrice" ng-model = "sortPrice" ng-click = "sortByPrice()" class = "browseButtons2">Sort By Price</button>
-            </div>
-        </div>
-        -->
-        
         
         <div class = "Price-trends">
             <label>Average Price: {{averageValue}}</label>

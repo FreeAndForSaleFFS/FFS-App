@@ -5,8 +5,9 @@ angular
 
         'use strict';
     //maximum amount of posts per page at page start.
-
         $scope.averageValue = 0;
+        $scope.dataType = "All";
+        $scope.buyOrSell = "buy";
         var postsLimit = 5,
             urlCheck = document.location.href;
         if (urlCheck.includes("?")) {
@@ -39,8 +40,14 @@ angular
         });
     
         $scope.buy = function () {
+            $scope.buyOrSell = "buy";
             $scope.limit = postsLimit;
-            $scope.myRequestData = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/BuyRequests");
+            if($scope.dataType == "All") {
+                $scope.myRequestData = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/BuyRequests");
+            }
+            else {
+                $scope.myRequestData = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/Buy/" + $scope.dataType )
+            }
             console.log("buy");
             $scope.myRequestData.on('value', function (dataSnapshot) {
                 $timeout(function () {
@@ -54,8 +61,14 @@ angular
         };
     
         $scope.sell = function () {
+            $scope.buyOrSell = "sell";
             $scope.limit = postsLimit;
-            $scope.myRequestData = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/SellRequests");
+            if($scope.dataType == "All") {
+                $scope.myRequestData = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/SellRequests");
+            }
+            else {
+                $scope.myRequestData = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/Sell/" + $scope.dataType )
+            }
             console.log("sell");
             $scope.myRequestData.on('value', function (dataSnapshot) {
                 $timeout(function () {
@@ -84,7 +97,96 @@ angular
             $scope.limit += postsLimit;
             console.log(postsLimit);
         };
+        
+        $scope.setAll = function () {
+            $scope.dataType = "All";
+            if ($scope.buyOrSell == "buy") {
+                $scope.buy();
+            }
+            else {
+                $scope.sell();
+            }
+        };    
     
+        $scope.setBooks = function () {
+            $scope.dataType = "Books";
+            if ($scope.buyOrSell == "buy") {
+                $scope.buy();
+            }
+            else {
+                $scope.sell();
+            }
+        };
+    
+        $scope.setNotes = function () {
+            $scope.dataType = "Notes";
+            if ($scope.buyOrSell == "buy") {
+                $scope.buy();
+            }
+            else {
+                $scope.sell();
+            }
+        };
+    
+        $scope.setFurniture = function () {
+            $scope.dataType = "Furniture";
+            if ($scope.buyOrSell == "buy") {
+                $scope.buy();
+            }
+            else {
+                $scope.sell();
+            }
+        };
+    
+        $scope.setClothes = function () {
+            $scope.dataType = "Clothes";
+            if ($scope.buyOrSell == "buy") {
+                $scope.buy();
+            }
+            else {
+                $scope.sell();
+            }
+        };
+    
+        $scope.setFood = function () {
+            $scope.dataType = "Food";
+            if ($scope.buyOrSell == "buy") {
+                $scope.buy();
+            }
+            else {
+                $scope.sell();
+            }
+        };
+    
+        $scope.setServices = function () {
+            $scope.dataType = "Services";
+            if ($scope.buyOrSell == "buy") {
+                $scope.buy();
+            }
+            else {
+                $scope.sell();
+            }
+        };
+    
+        $scope.setTechnology = function () {
+            $scope.dataType = "Technology";
+            if ($scope.buyOrSell == "buy") {
+                $scope.buy();
+            }
+            else {
+                $scope.sell();
+            }
+        };
+    
+        $scope.setOther = function () {
+            $scope.dataType = "Other";
+            if ($scope.buyOrSell == "buy") {
+                $scope.buy();
+            }
+            else {
+                $scope.sell();
+            }
+        };
         $scope.sortByDate = function () {
             $scope.predicate = "-time";
         };
