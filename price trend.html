@@ -1,14 +1,14 @@
-<!DOCTYPE html>
+ f<!DOCTYPE html>
  <html>
     <head>
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <title>Profile Page</title>
-        <link href = "profile.css" rel="stylesheet">
+        <title>Browse Page</title>
+        <link href="styles.css" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
     </head>
-    <body ng-app="ngTeam" ng-controller="profileController">
+    <body ng-app="ngTeam" ng-controller="pricetrendController">
         <div id="developerNavbar">
             <nav class="navbar navbar-default navbar-fixed-top">
                 <div class="container-fluid">
@@ -23,11 +23,18 @@
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="Browse.html?">Browse</a></li>
+                        <li class="active"><a href="Browse.html?">Browse</a></li>
+                        <li class="dropdown">
+                        <a href="https://getbootstrap.com/examples/navbar/#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sort By: <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li><a ng-model = "buyButton" ng-click = "sortByPrice()">Price</a></li>
+                          <li><a ng-model = "buyButton" ng-click = "sortByDate()">Date</a></li>
+                        </ul>
+                      </li>
                     </ul>
                     <form class="navbar-form navbar-left">
                         <div class="input-group">
-                            <input type="text" ng-model="searchBy" class="form-control" placeholder="Search">
+                            <input type="text" ng-model="searchBy" ng-change="dateArray()" class="form-control" placeholder="Search">
                             <div class="input-group-btn">
                                 <button ng-click="searchFunc()" class="btn btn-default" type="button">
                                     <i class="glyphicon glyphicon-search"></i>
@@ -46,62 +53,35 @@
             </nav>
         </div>
         
-        <div id = "profileContainer" class="container">
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" > 
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">{{user.firstName}} {{user.lastName}}</h3>
-                        </div>
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src={{user.userImageLink}} class="img-circle img-responsive"> </div>
-                                <div class=" col-md-9 col-lg-9 "> 
-                                    <table class="table table-user-information">
-                                        <tbody>
-                                            <tr>
-                                                <td>UCSD Email:</td>
-                                                <td>{{user.email}}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Contact Email:</td>
-                                                <td>{{user.contactEmail}}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Phone Number:</td>
-                                                <td>{{user.contactNumber}}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                  
-                                    <a href="#" id ="myPosts" class="btn btn-primary">My Posts</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel-footer">
-                            <a href = {{"mailto:"+user.contactEmail+"?Subject=Hello%20there!"}} data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a><label>E-mail</label>
-                            <span class="pull-right">
-                                <label>Rate</label><a href="edit.html" data-original-title="Rate this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id = "Sorting" style="text-align:center">
+        <div id = "Sorting">
             <div id = "BuyOrSell">
                     <button type ="button" id="browseBuyButton" ng-model = "buyButton" ng-click = "buy()" class= "browseButtons">BUY</button>
                     <button type ="button" id="browseSellButton" ng-model = "sellButton" ng-click = "sell()" class = "browseButtons">SELL</button>
             </div>
         </div>
-        <label>buy</label>
+        <!--
+        <div id = "Sorting2">
+            <div id = "DateOrPrice">
+                    <button type ="button" id="sortByDate" ng-model = "sortDate" ng-click = "sortByDate()" class= "browseButtons2">Sort By Date</button>
+                    <button type ="button" id="sortByPrice" ng-model = "sortPrice" ng-click = "sortByPrice()" class = "browseButtons2">Sort By Price</button>
+            </div>
+        </div>
+        -->
+        
+        
+        <div class = "Price-trends">
+            <label>Average Price: {{averageValue}}</label>
+        </div>
         <div id="usertable">
-            <div class="panel-body" ng-repeat="(key,request) in buyRequestData|asArray|filter:{userID:profileuid}" style="min-width: 300px">
+            <div class="panel-body" ng-repeat="(key,request) in requestData|asArray|filter:{itemName :searchBy}|orderBy:predicate|limitTo:limit" style="min-width: 300px">
               <div class="row">
                 <div class="col-md-3 col-lg-3 " align="center" style="min-width: 230px"> 
                     <img class = "users" alt="User Pic" src={{request.imageLink}}> 
                 </div>
                 <div class=" col-md-3 col-lg-3 "> 
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6" style="min-width: 200px"><h4><a href={{"profile.html?name="+request.userID}}>{{request.firstName}} {{request.lastName}}</a></h4></div>
+                    </div>
                     <div class="row">
                         <div class="col-md-6 col-lg-6" style="min-width: 200px"><h4><b>Item Name:</b> {{request.itemName}}</h4></div>
                     </div>
@@ -122,34 +102,8 @@
                   </div>
                 </div>
             </div>
-        </div>
-        <label>sell</label>
-        <div id="usertable">
-            <div class="panel-body" ng-repeat="(key,request) in sellRequestData|asArray|filter:{userID:profileuid}" style="min-width: 300px">
-              <div class="row">
-                <div class="col-md-3 col-lg-3 " align="center" style="min-width: 230px"> 
-                    <img class = "users" alt="User Pic" src={{request.imageLink}}> 
-                </div>
-                <div class=" col-md-3 col-lg-3 "> 
-                    <div class="row">
-                        <div class="col-md-6 col-lg-6" style="min-width: 200px"><h4><b>Item Name:</b> {{request.itemName}}</h4></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-lg-6" style="min-width: 200px"><h4><b>Negotiable: </b> {{request.checked ? "yes" : "no"}}</h4></div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-lg-3 comments"> 
-                    <div class="row">
-                        <div class = "col-md-3 col-lg-3" style="min-width: 300px"><h4><b>Item Description:</b> {{request.itemDescription}}</h4></div>
-                    </div>
-                    <div class="row">
-                        <div class = "col-md-3 col-lg-3" style="min-width: 300px"><h4><b>Price:</b> ${{request.itemPrice}}</h4></div>
-                    </div>
-                    <div class = "row">
-                        <button type ="button" id={{request.itemName}} ng-model = "amazonPrice" ng-click = "amazonPrice()">Check Amazon</button>
-                    </div>
-                  </div>
-                </div>
+            <div style="text-align:center">
+                <button type ="button" ng-click = "incrementLimit()" class= "browseButtons">Load more items.</button>
             </div>
         </div>
      </body>
@@ -158,7 +112,7 @@
      <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.4.0/ui-bootstrap-tpls.min.js"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.4.0/ui-bootstrap.min.js"></script>
      <script src="ngteam.js"></script>
-     <script src="ng-team/profileController.js"></script>
+     <script src="ng-team/pricetrendController.js"></script>
      <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
      <script type="text/javascript" src = "logout.js"></script>
 </html>
