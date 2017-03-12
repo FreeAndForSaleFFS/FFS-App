@@ -27,7 +27,7 @@ $(document).ready(function () {
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
                 var uid = user.uid,
-                    newFirstName = document.getElementById('lastName').value,
+                    newLastName = document.getElementById('lastName').value,
                     myUserRef = "https://free-and-for-sale-8f8a4.firebaseio.com/users/" + uid,
                     myUserFirebase = new Firebase(myUserRef);
                 myUserFirebase.update({"lastName": newLastName});
@@ -40,7 +40,7 @@ $(document).ready(function () {
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
                 var uid = user.uid,
-                    newFirstName = document.getElementById('contactEmail').value,
+                    newEmail = document.getElementById('contactEmail').value,
                     myUserRef = "https://free-and-for-sale-8f8a4.firebaseio.com/users/" + uid,
                     myUserFirebase = new Firebase(myUserRef);
                 myUserFirebase.update({"contactEmail": newEmail});
