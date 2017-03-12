@@ -77,13 +77,14 @@
             <div id = "settings-form" class = "form">
                 <form class = "settings-form">
                     <Label id="cheating">Settings</Label><br/>
-                    <label>First Name: </label><input id="firstName" type="text" placeholder= {{currUser.firstName}} /><span class = "settings-page-buttons"><button type="button" id="updateFirstNameButton" class = "glyphicon glyphicon-edit"></button></span> <br/>
-                    <label>Last Name: </label><input id="lastName" type="text" placeholder= {{currUser.lastName}} />
-                    <span id = "settings-page-buttons-lastname"><button type="button" id="updateLastNameButton" class = "glyphicon glyphicon-edit"></button></span>
+                    <label>First Name : </label><span class = "settings-page-inputbox"><input id="firstName" type="text" placeholder= {{currUser.firstName}} /></span><span class = "settings-page-buttons"><button type="button" id="updateFirstNameButton" class = "glyphicon glyphicon-edit"></button></span> <br/>
+                    <label>Last Name : </label><span class = "settings-page-inputbox"><input id="lastName" type="text" placeholder= {{currUser.lastName}} /></span>
+                    <span id = "settings-page-buttons-diff"><button type="button" id="updateLastNameButton" class = "glyphicon glyphicon-edit"></button></span>
                     <br/>
-                    <label>Contact Email: </label><input id="contactEmail" type="text" placeholder= {{currUser.contactEmail}} /><span class = "settings-page-buttons"><button type="button" id="updateEmailButton" class = "glyphicon glyphicon-edit"></button></span>
+                    <label>Contact Number : </label><span class = "settings-page-inputbox"><input id="contactPhone" type="text" placeholder= {{currUser.contactNumber}} /> </span><span id = "settings-page-buttons-diff"><button type="button" id="updateContactNumberButton" class = "glyphicon glyphicon-edit" ></button></span>
                     <br/>
-                    <label>Contact Number </label><input id="contactPhone" type="text" placeholder= {{currUser.contactNumber}} /> <span class= "settings-page-buttons"><button type="button" id="updateContactNumberButton" class = "glyphicon glyphicon-edit" ></button></span>
+                    <label>Contact Email : </label><span class = "settings-page-inputbox"><input id="contactEmail" type="text" placeholder= {{currUser.contactEmail}} /></span><span class = "settings-page-buttons"><button type="button" id="updateEmailButton" class = "glyphicon glyphicon-edit"></button></span>
+                    <br/>
                     <button type="button" id="resetPasswordButton">Reset Password</button> <button type="button" id="deleteAccountButton">Delete Account</button>
                 </form>
             </div>

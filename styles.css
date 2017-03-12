@@ -259,11 +259,14 @@ body {
   font-size: 14px;
 }
 .settings-page-buttons {
-  padding-left: 10px;
-}
-#settings-page-buttons-lastname {
   padding-left: 7px;
+}
+#settings-page-buttons-diff {
+  padding-left: 4px;
 }
 #cheating {
   font-size: 30px;
+}
+.settings-page-inputbox {
+  padding-left: 5px;
 }
