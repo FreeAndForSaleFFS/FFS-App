@@ -24,6 +24,13 @@
                     <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="Browse.html?">Browse</a></li>
+                        <li class="dropdown">
+                        <a href="https://getbootstrap.com/examples/navbar/#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sort By: <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li><a ng-model = "buyButton" ng-click = "sortByPrice()">Price</a></li>
+                          <li><a ng-model = "buyButton" ng-click = "sortByDate()">Date</a></li>
+                        </ul>
+                      </li>
                     </ul>
                     <form class="navbar-form navbar-left">
                         <div class="input-group">
@@ -52,12 +59,14 @@
                     <button type ="button" id="browseSellButton" ng-model = "sellButton" ng-click = "sell()" class = "browseButtons">SELL</button>
             </div>
         </div>
+        <!--
         <div id = "Sorting2">
             <div id = "DateOrPrice">
                     <button type ="button" id="sortByDate" ng-model = "sortDate" ng-click = "sortByDate()" class= "browseButtons2">Sort By Date</button>
                     <button type ="button" id="sortByPrice" ng-model = "sortPrice" ng-click = "sortByPrice()" class = "browseButtons2">Sort By Price</button>
             </div>
         </div>
+        -->
         
         
         <div class = "Price-trends">

@@ -71,29 +71,6 @@
                                                 <td>Phone Number:</td>
                                                 <td>{{user.contactNumber}}</td>
                                             </tr>
-                                         <!--   <tr>
-                                                <td>Date of Birth</td>
-                                                <td>01/24/1988</td>
-                                            </tr>
-                    
-                                            <tr>
-                                                <td>Gender</td>
-                                                <td>Female</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Home Address</td>
-                                                <td>Kathmandu,Nepal</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Email</td>
-                                                <td><a href="mailto:info@support.com">info@support.com</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Phone Number</td>
-                                                <td>123-4567-890(Landline)<br><br>555-4567-890(Mobile)
-                                                </td>
-                                            </tr>       -->            
-                     
                                         </tbody>
                                     </table>
                   
@@ -102,17 +79,73 @@
                             </div>
                         </div>
                         <div class="panel-footer">
-                            <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a><label>E-mail</label>
+                            <a href = {{"mailto:"+user.contactEmail+"?Subject=Hello%20there!"}} data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a><label>E-mail</label>
                             <span class="pull-right">
                                 <label>Rate</label><a href="edit.html" data-original-title="Rate this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
                             </span>
                         </div>
-            
                     </div>
                 </div>
             </div>
         </div>
-        
+        <label>buy</label>
+        <div id="usertable">
+            <div class="panel-body" ng-repeat="(key,request) in buyRequestData|asArray|filter:{userID:profileuid}" style="min-width: 300px">
+              <div class="row">
+                <div class="col-md-3 col-lg-3 " align="center" style="min-width: 230px"> 
+                    <img class = "users" alt="User Pic" src={{request.imageLink}}> 
+                </div>
+                <div class=" col-md-3 col-lg-3 "> 
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6" style="min-width: 200px"><h4><b>Item Name:</b> {{request.itemName}}</h4></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6" style="min-width: 200px"><h4><b>Negotiable: </b> {{request.checked ? "yes" : "no"}}</h4></div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-lg-3 comments"> 
+                    <div class="row">
+                        <div class = "col-md-3 col-lg-3" style="min-width: 300px"><h4><b>Item Description:</b> {{request.itemDescription}}</h4></div>
+                    </div>
+                    <div class="row">
+                        <div class = "col-md-3 col-lg-3" style="min-width: 300px"><h4><b>Price:</b> ${{request.itemPrice}}</h4></div>
+                    </div>
+                    <div class = "row">
+                        <button type ="button" id={{request.itemName}} ng-model = "amazonPrice" ng-click = "amazonPrice()">Check Amazon</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <label>sell</label>
+        <div id="usertable">
+            <div class="panel-body" ng-repeat="(key,request) in sellRequestData|asArray|filter:{userID:profileuid}" style="min-width: 300px">
+              <div class="row">
+                <div class="col-md-3 col-lg-3 " align="center" style="min-width: 230px"> 
+                    <img class = "users" alt="User Pic" src={{request.imageLink}}> 
+                </div>
+                <div class=" col-md-3 col-lg-3 "> 
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6" style="min-width: 200px"><h4><b>Item Name:</b> {{request.itemName}}</h4></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6" style="min-width: 200px"><h4><b>Negotiable: </b> {{request.checked ? "yes" : "no"}}</h4></div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-lg-3 comments"> 
+                    <div class="row">
+                        <div class = "col-md-3 col-lg-3" style="min-width: 300px"><h4><b>Item Description:</b> {{request.itemDescription}}</h4></div>
+                    </div>
+                    <div class="row">
+                        <div class = "col-md-3 col-lg-3" style="min-width: 300px"><h4><b>Price:</b> ${{request.itemPrice}}</h4></div>
+                    </div>
+                    <div class = "row">
+                        <button type ="button" id={{request.itemName}} ng-model = "amazonPrice" ng-click = "amazonPrice()">Check Amazon</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
      </body>
      <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script> 
      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>

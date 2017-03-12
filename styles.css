@@ -203,6 +203,11 @@ body {
   transition: all 0.3 ease;
   cursor: pointer;
 }
+
+.browseButtons:hover{
+  background: #65839a;
+}
+
 .browseButtons2 {
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;

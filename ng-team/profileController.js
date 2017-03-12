@@ -20,11 +20,30 @@ angular
 
     $scope.myUserData = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/users/"+$scope.profileuid);
     $scope.user = {};
-    
+    $scope.userUID = "";
     $scope.myUserData.on('value', function (dataSnapshot) {
       $timeout(function () {
           $scope.user = dataSnapshot.val();
+          $scope.userUID = $scope.user.userID;
       });
+    });
+    
+    $scope.myBuyRequestData = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/BuyRequests");
+    $scope.buyRequestData = {};
+    
+    $scope.myBuyRequestData.on('value', function (dataSnapshot) {
+        $timeout(function () {
+            $scope.buyRequestData = dataSnapshot.val();
+        });
+    });
+    
+    $scope.mySellRequestData = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/SellRequests");
+    $scope.sellRequestData = {};
+    
+    $scope.mySellRequestData.on('value', function (dataSnapshot) {
+        $timeout(function () {
+            $scope.sellRequestData = dataSnapshot.val();
+        });
     });
 
 });

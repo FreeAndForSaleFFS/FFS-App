@@ -52,6 +52,7 @@ angular
                 });
             });
         };
+    
         $scope.sell = function () {
             $scope.limit = postsLimit;
             $scope.myRequestData = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/SellRequests");
@@ -66,6 +67,7 @@ angular
                 });
             });
         };
+    
         $scope.amazonPrice = function () {
             var e = window.event,
                 btn = e.target || e.srcElement;
