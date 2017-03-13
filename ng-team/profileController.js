@@ -132,6 +132,17 @@ angular
                 });
                 if($scope.itemUID!==user.uid){
                     alert("Action not allowed");
+                        localStorage.removeItem("checked");
+                        localStorage.removeItem("itemName");
+                        localStorage.removeItem("itemPrice");
+                        localStorage.removeItem("itemDescription");
+                        localStorage.removeItem("category");
+                        localStorage.removeItem("firstName");
+                        localStorage.removeItem("imageLink");
+                        localStorage.removeItem("lastName");
+                        localStorage.removeItem("type");
+                        localStorage.removeItem("userID");
+
                     return;
                     
                 } else{
@@ -168,6 +179,17 @@ angular
                 });
                 if($scope.itemUID!==user.uid){
                     alert("Action not allowed");
+                        localStorage.removeItem("checked");
+                        localStorage.removeItem("itemName");
+                        localStorage.removeItem("itemPrice");
+                        localStorage.removeItem("itemDescription");
+                        localStorage.removeItem("category");
+                        localStorage.removeItem("firstName");
+                        localStorage.removeItem("imageLink");
+                        localStorage.removeItem("lastName");
+                        localStorage.removeItem("type");
+                        localStorage.removeItem("userID");
+
                     return;
                     
                 } else{
