@@ -7,7 +7,8 @@ angular
     //maximum amount of posts per page at page start.
 
         $scope.averageValue = 0;
-        var temp;
+        var temp1;
+        var temp2;
         var text = "";
 
         var postsLimit = 5,
@@ -145,14 +146,15 @@ angular
                 if (dataName.includes(searchText)) {
                     console.log(requestData.itemName);
                     priceRet.push(requestData.itemPrice);
-                    dateRet.push(requestData.time);
+                    dateRet.push(requestData.time.substring(0,10));
                 }
             });
 
             console.log("priceRet is: " + priceRet.toString());
             console.log("dateRet is " + dateRet.toString());
     
-            temp = priceRet;
+            temp1 = priceRet;
+            temp2 = dateRet;
 
             var myConfig = 
             {
@@ -181,6 +183,8 @@ angular
                     }
                 },
                 "scale-x": {
+                    "values" : dateRet,
+                    /*
                     "min-value": 1383292800000,
                     "shadow": 0,
                     "step": 3600000,
@@ -198,6 +202,7 @@ angular
                         "visible": false
                     },
                     "minor-ticks": 0
+                    */
                 },
                 "scale-y": {
                     "auto-fit": "true",
