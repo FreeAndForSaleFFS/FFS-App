@@ -75,6 +75,7 @@ angular
         });
 
     };
+
     $scope.deleteSellPost = function () {
         $scope.items={};
         $scope.itemCategory = "";
@@ -108,20 +109,94 @@ angular
             });
     };
     $scope.updateSellPost = function () {
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
                 var e = window.event,
                     btn = e.target || e.srcElement;
                 var itemID = btn.id,
                     myItemRef = "https://free-and-for-sale-8f8a4.firebaseio.com/posts/SellRequests/"+itemID;
                 $scope.myItemFirebase = new Firebase(myItemRef);
+
                 $scope.myItemFirebase.on('value', function (dataSnapshot) {    
                         localStorage.setItem("checked", dataSnapshot.child("checked").val());
                         localStorage.setItem("itemName", dataSnapshot.child("itemName").val())
                         localStorage.setItem("itemPrice", dataSnapshot.child("itemPrice").val())
                         localStorage.setItem("itemDescription", dataSnapshot.child("itemDescription").val())
-
+                        localStorage.setItem("category", dataSnapshot.child("category").val());
+                        localStorage.setItem("firstName", dataSnapshot.child("firstName").val());
+                        localStorage.setItem("imageLink", dataSnapshot.child("imageLink").val());
+                        localStorage.setItem("lastName", dataSnapshot.child("lastName").val());
+                        localStorage.setItem("type", dataSnapshot.child("sellRequest").val());
+                        localStorage.setItem("userID", dataSnapshot.child("userID").val());
+                        $scope.itemUID = dataSnapshot.child("userID").val();
                 });
-            
-        window.location.href = "updatePost.html";
-    };
+                if($scope.itemUID!==user.uid){
+                    alert("Action not allowed");
+                        localStorage.removeItem("checked");
+                        localStorage.removeItem("itemName");
+                        localStorage.removeItem("itemPrice");
+                        localStorage.removeItem("itemDescription");
+                        localStorage.removeItem("category");
+                        localStorage.removeItem("firstName");
+                        localStorage.removeItem("imageLink");
+                        localStorage.removeItem("lastName");
+                        localStorage.removeItem("type");
+                        localStorage.removeItem("userID");
 
+                    return;
+                    
+                } else{
+                   window.location.href = "updateSellPost.html";            
+                }
+        
+
+                }
+            });   
+    
+    };
+    
+    $scope.updateBuyPost = function () {
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                var e = window.event,
+                    btn = e.target || e.srcElement;
+                var itemID = btn.id,
+                    myItemRef = "https://free-and-for-sale-8f8a4.firebaseio.com/posts/BuyRequests/"+itemID;
+                $scope.myItemFirebase = new Firebase(myItemRef);
+
+                $scope.myItemFirebase.on('value', function (dataSnapshot) {    
+                        localStorage.setItem("checked", dataSnapshot.child("checked").val());
+                        localStorage.setItem("itemName", dataSnapshot.child("itemName").val())
+                        localStorage.setItem("itemPrice", dataSnapshot.child("itemPrice").val())
+                        localStorage.setItem("itemDescription", dataSnapshot.child("itemDescription").val())
+                        localStorage.setItem("category", dataSnapshot.child("category").val());
+                        localStorage.setItem("firstName", dataSnapshot.child("firstName").val());
+                        localStorage.setItem("imageLink", dataSnapshot.child("imageLink").val());
+                        localStorage.setItem("lastName", dataSnapshot.child("lastName").val());
+                        localStorage.setItem("type", dataSnapshot.child("sellRequest").val());
+                        localStorage.setItem("userID", dataSnapshot.child("userID").val());
+                        $scope.itemUID = dataSnapshot.child("userID").val();
+                });
+                if($scope.itemUID!==user.uid){
+                    alert("Action not allowed");
+                        localStorage.removeItem("checked");
+                        localStorage.removeItem("itemName");
+                        localStorage.removeItem("itemPrice");
+                        localStorage.removeItem("itemDescription");
+                        localStorage.removeItem("category");
+                        localStorage.removeItem("firstName");
+                        localStorage.removeItem("imageLink");
+                        localStorage.removeItem("lastName");
+                        localStorage.removeItem("type");
+                        localStorage.removeItem("userID");
+
+                    return;
+                    
+                } else{
+                    window.location.href = "updateBuyPost.html";
+                }
+                
+                }
+            });  
+    };
 });
