@@ -40,6 +40,19 @@
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="Browse.html?">Browse</a></li>
+                            <li class="inactive"><a href="pricetrend.html?">Price Trend</a></li>
+                            <li>
+                            <form class="navbar-form navbar-left">
+                                <div class="input-group">
+                                    <input type="text" ng-model="searchBy" ng-change="computeAverage()" class="form-control" placeholder="Search">
+                                    <div class="input-group-btn">
+                                        <button ng-click="searchFunc()" class="btn btn-default" type="button">
+                                            <i class="glyphicon glyphicon-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                            </li>
                             <li class="dropdown">
                                 <a href="https://getbootstrap.com/examples/navbar/#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sort By: <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
@@ -63,23 +76,15 @@
                                     <li><a ng-model = "catOther" ng-click = "setOther()">Other</a></li>
                                 </ul>
                             </li>
+                            <!--
                             <li class="dropdown">
                                 <a href="https://getbootstrap.com/examples/navbar/#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> View Average Price: <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li><a ng-model = "buyButton" ng-click = "sortByPrice();reverse = true">Price: $ {{averageValue}}</a></li>
                                 </ul>
                             </li>
+                            -->
                         </ul>
-                        <form class="navbar-form navbar-left">
-                            <div class="input-group">
-                                <input type="text" ng-model="searchBy" ng-change="computeAverage()" class="form-control" placeholder="Search">
-                                <div class="input-group-btn">
-                                    <button ng-click="searchFunc()" class="btn btn-default" type="button">
-                                        <i class="glyphicon glyphicon-search"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="newPost.html"><span class="glyphicon glyphicon-plus"></span></a></li>
                             <li><a id = "profileLink"><span class="glyphicon glyphicon-user"></span></a></li>

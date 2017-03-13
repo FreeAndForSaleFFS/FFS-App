@@ -118,6 +118,7 @@ angular
 
         $scope.dataArray = function () {
             console.log("checkDate");
+            $scope.computeAverage();
             var count = 0,
                 priceRet = [],
                 dateRet = [],
@@ -147,6 +148,7 @@ angular
 
             var myConfig = 
             {
+
                 "type": "line",
                 "utc": true,
                 "title": {
@@ -247,7 +249,7 @@ angular
  
             zingchart.render({ 
                 id : 'myChart', 
-                data : myConfig, 
+                data : myConfig,
                 height: '100%', 
                 width: '100%' 
             });
