@@ -8,6 +8,22 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
     </head>
+    <style>
+        #myProgress {
+          width: 100%;
+          background-color: #879eb0;
+        }
+
+        #myBar {
+          width: 1%;
+          height: 10px;
+          background-color: #65839a;
+          text-align: center;
+        }
+        #avg {
+            display: none;
+        }
+    </style>
     <body ng-app="ngTeam" ng-controller="browseController">
         <div id="developerNavbar">
             <nav class="navbar navbar-default navbar-fixed-top">
@@ -69,14 +85,21 @@
         
         <div id = "Sorting" style="text-align: center">
             <div id = "BuyOrSell">
-                    <button type ="button" id="browseBuyButton" ng-model = "buyButton" ng-click = "buy()" class= "browseButtons">Currently being seeked</button>
-                    <button type ="button" id="browseSellButton" ng-model = "sellButton" ng-click = "sell()" class = "browseButtons">Currently on Sale</button>
+                    <button type ="button" id="browseBuyButton" ng-model = "buyButton" ng-click = "buy()" class= "browseButtons">Looking For</button>
+                    <button type ="button" id="browseSellButton" ng-model = "sellButton" ng-click = "sell()" class = "browseButtons">For Sale</button>
             </div>
         </div>
-        
-        <div class = "Price-trends">
+        <br>
+
+        <br>
+        <div align="center">
+            <button onclick="show()">Calculate Average:</button> 
+        </div>
+        <div class = "Price-trends" id="avg" align="center" style="display:none">
             <label>Average Price: {{averageValue}}</label>
         </div>
+        <br>
+
         <div id="usertable">
             <div class="panel-body" ng-repeat="(key,request) in requestData|asArray|filter:{itemName :searchBy}|orderBy:predicate|limitTo:limit" style="min-width: 300px">
               <div class="row">
@@ -108,7 +131,7 @@
                         <div class = "col-md-3 col-lg-3" style="min-width: 300px"><h4><b>Date Posted:</b> {{request.time.substring(0,10)}}</h4></div>
                     </div>
                     <div class = "row">
-                        <button type ="button" id={{request.itemName}} ng-model = "amazonPrice" ng-click = "amazonPrice()">Check Amazon</button>
+                        <button class="amazonBtn" style="margin-left: 15px" type ="button" id={{request.itemName}} ng-model = "amazonPrice" ng-click = "amazonPrice()">Check Amazon</button>
                     </div>
                   </div>
                 </div>
@@ -118,6 +141,19 @@
             </div>
         </div>
      </body>
+
+     <script>
+     function show() {
+        var div = document.getElementById('avg');
+        if (div.style.display !== 'none') {
+            div.style.display = 'none';
+        }
+        else {
+            div.style.display = 'block';
+        }
+     }
+     </script>
+
      <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script> 
      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.4.0/ui-bootstrap-tpls.min.js"></script>
