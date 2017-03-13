@@ -182,8 +182,8 @@ angular
             var e = window.event,
                 btn = e.target || e.srcElement,
                 itemID = btn.id,
-                myItemRefSRQ = "https://free-and-for-sale-8f8a4.firebaseio.com/posts/BuyRequests/" + itemID,
-                myItemRefSell = "https://free-and-for-sale-8f8a4.firebaseio.com/posts/Buy/" + localStorage.getItem("category") + "/" + itemID,
+                myItemRefBRQ = "https://free-and-for-sale-8f8a4.firebaseio.com/posts/BuyRequests/" + itemID,
+                myItemRefBuy = "https://free-and-for-sale-8f8a4.firebaseio.com/posts/Buy/" + localStorage.getItem("category") + "/" + itemID,
                 newItemName = document.getElementById('newItemName').value,
                 newItemPrice = document.getElementById('newItemPrice').value,
                 newItemDescription = document.getElementById('newItemDescription').value,
@@ -207,8 +207,8 @@ angular
             }
 
             
-            myItemFirebaseSell.remove();
-            myItemFirebaseSRQ.remove();
+            myItemFirebaseBuy.remove();
+            myItemFirebaseBRQ.remove();
             
         var file ="";
         var postRef, categoryRef, entryKey;
