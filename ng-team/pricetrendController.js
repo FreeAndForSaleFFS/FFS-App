@@ -9,6 +9,7 @@ angular
         $scope.averageValue = 0;
         var temp1;
         var temp2;
+        var seriesName = "";
         var text = "";
 
         var postsLimit = 5,
@@ -119,9 +120,11 @@ angular
             $scope.averageValue = average;
             if(searchText != "") {
                 searchText = searchText.toLowerCase();
+                seriesName = searchText.toLowerCase();
                 text = "Average price for items containing '" + searchText + "': $" + average;
             }
             else {
+                seriesName = "All items";
                 text = "Average price for all items: $" + average;
             }
         };
@@ -136,6 +139,7 @@ angular
                 searchText = $scope.searchBy;
             if (!searchText) {
                 searchText = "";
+                seriesName = "";
             }
             searchText = searchText.toUpperCase();
             console.log(searchText);
@@ -158,7 +162,7 @@ angular
 
             var myConfig = 
             {
-
+                "background-color": "#def1f2",
                 "type": "line",
                 "utc": true,
                 "title": {
@@ -184,6 +188,7 @@ angular
                 },
                 "scale-x": {
                     "values" : dateRet,
+                    "line-color": "#000000",
                     "label": {
                         "text": "Date",
                     },
@@ -209,7 +214,7 @@ angular
                 },
                 "scale-y": {
                     "auto-fit": "true",
-                    "line-color": "#f6f7f8",
+                    "line-color": "#000000",
                     "shadow": 0,
                     "guide": {
                         "line-style": "dashed"
@@ -258,7 +263,9 @@ angular
                 },
                 "series": [
                     {
-                        "values": priceRet
+                        "values": priceRet,
+                        "text" : seriesName,
+                        "legend-text" : seriesName
                     }
                 ]
             };
