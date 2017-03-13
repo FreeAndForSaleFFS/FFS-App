@@ -7,6 +7,8 @@ angular
     //maximum amount of posts per page at page start.
 
         $scope.averageValue = 0;
+        var temp;
+
         var postsLimit = 5,
             urlCheck = document.location.href;
         if (urlCheck.includes("?")) {
@@ -34,7 +36,7 @@ angular
                 angular.forEach($scope.requestData, function (requestData) {
                     requestData.itemPrice = parseFloat(requestData.itemPrice);
                 });
-                $scope.computeAverage();
+                $scope.dataArray();
             });
         });
     
@@ -48,7 +50,7 @@ angular
                     angular.forEach($scope.requestData, function (requestData) {
                         requestData.itemPrice = parseFloat(requestData.itemPrice);
                     });
-                    $scope.computeAverage();
+                    $scope.dataArray();
                 });
             });
         };
@@ -62,7 +64,7 @@ angular
                     angular.forEach($scope.requestData, function (requestData) {
                         requestData.itemPrice = parseFloat(requestData.itemPrice);
                     });
-                    $scope.computeAverage();
+                    $scope.dataArray();
                 });
             });
         };
@@ -114,10 +116,11 @@ angular
             $scope.averageValue = average;
         };
 
-        $scope.dateArray = function () {
+        $scope.dataArray = function () {
             console.log("checkDate");
             var count = 0,
-                arrRet = [0],
+                priceRet = [],
+                dateRet = [],
                 average = $scope.averageValue,
                 searchText = $scope.searchBy;
             if (!searchText) {
@@ -131,12 +134,122 @@ angular
                 dataName = dataName.toUpperCase();
                 if (dataName.includes(searchText)) {
                     console.log(requestData.itemName);
-                    arrRet.push(requestData.itemPrice);
+                    priceRet.push(requestData.itemPrice);
+                    dateRet.push(requestData.time);
                 }
             });
-            var ret = arrRet.toString();
-            console.log("ret is: " + ret);
+
+            console.log("priceRet is: " + priceRet.toString());
+            console.log("dateRet is " + dateRet.toString());
     
-            $scope.averageValue = ret;
+            $scope.averageValue = priceRet.toString();
+            temp = priceRet;
+
+            var myConfig = 
+            {
+                "type": "line",
+                "utc": true,
+                "title": {
+                    "text": "Webpage Analytics",
+                    "font-size": "24px",
+                    "adjust-layout":true
+                },
+                "plotarea": {
+                    "margin": "dynamic 45 60 dynamic",
+                },
+                "legend": {
+                    "layout": "float",
+                    "background-color": "none",
+                    "border-width": 0,
+                    "shadow": 0,
+                    "align":"center",
+                    "adjust-layout":true,
+                    "item":{
+                      "padding": 7,
+                      "marginRight": 17,
+                      "cursor":"hand"
+                    }
+                },
+                "scale-x": {
+                    "min-value": 1383292800000,
+                    "shadow": 0,
+                    "step": 3600000,
+                    "transform": {
+                        "type": "date",
+                        "all": "%D, %d %M<br />%h:%i %A",
+                        "guide": {
+                            "visible": false
+                        },
+                        "item": {
+                            "visible": false
+                        }
+                    },
+                    "label": {
+                        "visible": false
+                    },
+                    "minor-ticks": 0
+                },
+                "scale-y": {
+                    "auto-fit": "true",
+                    "line-color": "#f6f7f8",
+                    "shadow": 0,
+                    "guide": {
+                        "line-style": "dashed"
+                    },
+                    "label": {
+                        "text": "Page Views",
+                    },
+                    "minor-ticks": 0,
+                    "thousands-separator": ","
+                },
+                "crosshair-x": {
+                    "line-color": "#efefef",
+                    "plot-label": {
+                        "border-radius": "5px",
+                        "border-width": "1px",
+                        "border-color": "#f6f7f8",
+                        "padding": "10px",
+                        "font-weight": "bold"
+                    },
+                    "scale-label": {
+                        "font-color": "#000",
+                        "background-color": "#f6f7f8",
+                        "border-radius": "5px"
+                    }
+                },
+                "tooltip": {
+                    "visible": false
+                },
+                "plot": {
+                    "highlight":true,
+                    "tooltip-text": "%t views: %v<br>%k",
+                    "shadow": 0,
+                    "line-width": "2px",
+                    "marker": {
+                        "type": "circle",
+                        "size": 3
+                    },
+                    "highlight-state": {
+                        "line-width":3
+                    },
+                    "animation":{
+                      "effect":1,
+                      "sequence":2,
+                      "speed":100,
+                    }
+                },
+                "series": [
+                    {
+                        "values": priceRet
+                    }
+                ]
+            };
+ 
+            zingchart.render({ 
+                id : 'myChart', 
+                data : myConfig, 
+                height: '100%', 
+                width: '100%' 
+            });
         };
     });
