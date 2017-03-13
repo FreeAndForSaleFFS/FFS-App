@@ -134,8 +134,8 @@ $(document).ready(function () {
     }
     function deleteAccount() {
         var confirmation = confirm("Are you sure you want to delete your account? (You must fill out your login credentials again)"),
-            USER = window.prompt("enter your email"),
-            PASS = window.prompt("enter your password");
+            USER = window.prompt("Please enter your email"),
+            PASS = window.prompt("Please enter your password");
         if (confirmation === true) {
             firebase.auth().onAuthStateChanged(function (user) {
                 if (user) {
