@@ -107,5 +107,21 @@ angular
                 }
             });
     };
+    $scope.updateSellPost = function () {
+                var e = window.event,
+                    btn = e.target || e.srcElement;
+                var itemID = btn.id,
+                    myItemRef = "https://free-and-for-sale-8f8a4.firebaseio.com/posts/SellRequests/"+itemID;
+                $scope.myItemFirebase = new Firebase(myItemRef);
+                $scope.myItemFirebase.on('value', function (dataSnapshot) {    
+                        localStorage.setItem("checked", dataSnapshot.child("checked").val());
+                        localStorage.setItem("itemName", dataSnapshot.child("itemName").val())
+                        localStorage.setItem("itemPrice", dataSnapshot.child("itemPrice").val())
+                        localStorage.setItem("itemDescription", dataSnapshot.child("itemDescription").val())
+
+                });
+            
+        window.location.href = "updatePost.html";
+    };
 
 });
