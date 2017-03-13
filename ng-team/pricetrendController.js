@@ -184,6 +184,9 @@ angular
                 },
                 "scale-x": {
                     "values" : dateRet,
+                    "label": {
+                        "text": "Date",
+                    },
                     /*
                     "min-value": 1383292800000,
                     "shadow": 0,
@@ -212,7 +215,7 @@ angular
                         "line-style": "dashed"
                     },
                     "label": {
-                        "text": "Page Views",
+                        "text": "Price in USD",
                     },
                     "minor-ticks": 0,
                     "thousands-separator": ","
