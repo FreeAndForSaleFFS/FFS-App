@@ -8,6 +8,7 @@ angular
 
         $scope.averageValue = 0;
         var temp;
+        var text = "";
 
         var postsLimit = 5,
             urlCheck = document.location.href;
@@ -113,7 +114,15 @@ angular
                 }
             });
             console.log(average);
+            average = Number((average).toFixed(2));
             $scope.averageValue = average;
+            if(searchText != "") {
+                searchText = searchText.toLowerCase();
+                text = "Average price for items containing '" + searchText + "': $" + average;
+            }
+            else {
+                text = "Average price for all items: $" + average;
+            }
         };
 
         $scope.dataArray = function () {
@@ -143,7 +152,6 @@ angular
             console.log("priceRet is: " + priceRet.toString());
             console.log("dateRet is " + dateRet.toString());
     
-            $scope.averageValue = priceRet.toString();
             temp = priceRet;
 
             var myConfig = 
@@ -152,7 +160,7 @@ angular
                 "type": "line",
                 "utc": true,
                 "title": {
-                    "text": "Webpage Analytics",
+                    "text": text,
                     "font-size": "24px",
                     "adjust-layout":true
                 },
