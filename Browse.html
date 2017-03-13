@@ -43,8 +43,10 @@
                             <li class="dropdown">
                                 <a href="https://getbootstrap.com/examples/navbar/#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sort By: <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a ng-model = "buyButton" ng-click = "sortByPrice()">Price</a></li>
-                                    <li><a ng-model = "buyButton" ng-click = "sortByDate()">Date</a></li>
+                                    <li><a ng-model = "buyButton" ng-click = "sortByPrice();reverse = true">Price Low-High</a></li>
+                                    <li><a ng-model = "buyButton" ng-click = "sortByPrice();reverse = false">Price High-Low</a></li>
+                                    <li><a ng-model = "buyButton" ng-click = "sortByDate();reverse = false">Date Most Recent</a></li>
+                                    <li><a ng-model = "buyButton" ng-click = "sortByDate();reverse = true">Date Least Recent</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -101,7 +103,7 @@
         <br>
 
         <div id="usertable">
-            <div class="panel-body" ng-repeat="(key,request) in requestData|asArray|filter:{itemName :searchBy}|orderBy:predicate|limitTo:limit" style="min-width: 300px">
+            <div class="panel-body" ng-repeat="(key,request) in requestData|asArray|filter:{itemName :searchBy}|orderBy:predicate:reverse|limitTo:limit" style="min-width: 300px">
               <div class="row">
                 <div class="col-md-3 col-lg-3 " align="center" style="min-width: 230px"> 
                     <img class = "users" alt="User Pic" src={{request.imageLink}}> 
