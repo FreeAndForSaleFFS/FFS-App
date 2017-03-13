@@ -12,6 +12,7 @@ $(document).ready(function () {
     firebase.initializeApp(config);
     var database = firebase.database();
     function updateFirstName() {
+        var TIME_OUT = 3000;
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
                 var uid = user.uid,
@@ -19,11 +20,43 @@ $(document).ready(function () {
                     myUserRef = "https://free-and-for-sale-8f8a4.firebaseio.com/users/" + uid,
                     myUserFirebase = new Firebase(myUserRef);
                 myUserFirebase.update({"firstName": newFirstName});
+                
+                var sellRequest = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/SellRequests/"),
+                    buyRequest = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/BuyRequests/");
+        
+                sellRequest.on('value', function (posts) {
+                    posts.forEach(function (snapshot) {
+                        var obj = snapshot.val();
+                        if (obj.userID === user.uid) {
+                            var toChangeRequest = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/SellRequests/" + obj.itemName),
+                                toChangePost = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/Sell/" + obj.category + "/" + obj.itemName);
+                            
+                            toChangeRequest.update({"firstName" : newFirstName});
+                            toChangePost.update({"firstName" : newFirstName});
+                        }
+                    });
+                });
+                buyRequest.on('value', function (posts) {
+                    posts.forEach(function (snapshot) {
+                        var obj = snapshot.val();
+                        if (obj.userID === user.uid) {
+                            var toChangeRequest = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/BuyRequests/" + obj.itemName),
+                                toChangePost = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/Buy/" + obj.category + "/" + obj.itemName);
+
+                            toChangeRequest.update({"firstName" : newFirstName});
+                            toChangePost.update({"firstName" : newFirstName});
+
+                            
+                        }
+                    });
+                });
+                
             }
         });
-        location.reload();
+        window.setTimeout(location.reload.bind(location), TIME_OUT);
     }
     function updateLastName() {
+        var TIME_OUT = 3000;
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
                 var uid = user.uid,
@@ -31,9 +64,35 @@ $(document).ready(function () {
                     myUserRef = "https://free-and-for-sale-8f8a4.firebaseio.com/users/" + uid,
                     myUserFirebase = new Firebase(myUserRef);
                 myUserFirebase.update({"lastName": newLastName});
+                var sellRequest = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/SellRequests/"),
+                    buyRequest = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/BuyRequests/");
+        
+                sellRequest.on('value', function (posts) {
+                    posts.forEach(function (snapshot) {
+                        var obj = snapshot.val();
+                        if (obj.userID === user.uid) {
+                            var toChangeRequest = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/SellRequests/" + obj.itemName),
+                                toChangePost = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/Sell/" + obj.category + "/" + obj.itemName);
+                            
+                            toChangeRequest.update({"lastName" : newLastName});
+                            toChangePost.update({"lastName" : newLastName});
+                        }
+                    });
+                });
+                buyRequest.on('value', function (posts) {
+                    posts.forEach(function (snapshot) {
+                        var obj = snapshot.val();
+                        if (obj.userID === user.uid) {
+                            var toChangeRequest = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/BuyRequests/" + obj.itemName),
+                                toChangePost = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/Buy/" + obj.category + "/" + obj.itemName);
+                            toChangeRequest.update({"lastName" : newLastName});
+                            toChangePost.update({"lastName" : newLastName});
+                        }
+                    });
+                });
             }
         });
-        location.reload();
+        window.setTimeout(location.reload.bind(location), TIME_OUT);
     }
 
     function updateEmail() {
@@ -116,7 +175,7 @@ $(document).ready(function () {
             alert('Account not deleted');
         }
     }
-     function updateContactNumber() {
+    function updateContactNumber() {
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
                 var uid = user.uid,
@@ -126,9 +185,9 @@ $(document).ready(function () {
                 myUserFirebase.update({"contactNumber": newNumber});
             }
         });
-        location.reload()
+        location.reload();
     }
-    document.getElementById('updateContactNumberButton').addEventListener('click',updateContactNumber)
+    document.getElementById('updateContactNumberButton').addEventListener('click', updateContactNumber);
     document.getElementById('deleteAccountButton').addEventListener('click', deleteAccount);
     document.getElementById('resetPasswordButton').addEventListener('click', updatePassword);
     document.getElementById('updateFirstNameButton').addEventListener('click', updateFirstName);
