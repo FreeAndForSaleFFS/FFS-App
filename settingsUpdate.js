@@ -133,44 +133,69 @@ $(document).ready(function () {
       // [END sendpasswordemail];
     }
     function deleteAccount() {
-        var confirmation = confirm("Are you sure you want to delete your account? (You must fill out your login credentials again)");
+        var confirmation = confirm("Are you sure you want to delete your account? (You must fill out your login credentials again)"),
+            USER = window.prompt("enter your email"),
+            PASS = window.prompt("enter your password");
         if (confirmation === true) {
             firebase.auth().onAuthStateChanged(function (user) {
                 if (user) {
 
                     var uid = user.uid,
-                        newEmail = document.getElementById('contactEmail').value,
                         myUserRef = "https://free-and-for-sale-8f8a4.firebaseio.com/users/" + uid,
                         myUserFirebase = new Firebase(myUserRef);
 
-                    myUserFirebase.remove();
                     
-                    var reLogin = firebase.auth().currentUser;
-                    var credential;
+                    
+                    var reLogin = firebase.auth().currentUser,
 
-                    // Prompt the user to re-provide their sign-in credentials
 
+                        credential = firebase.auth.EmailAuthProvider.credential(
+                            USER,
+                            PASS
+                        );       
                     reLogin.reauthenticate(credential).then(function () {
-                        // User re-authenticated.
-                    }, function (error) {
+                        var toDelete = firebase.auth().currentUser;
+
+                        myUserFirebase.remove();
+                        toDelete.delete().then(function () {                            
+                            
+                            var sellRequest = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/SellRequests/"),
+                                buyRequest = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/BuyRequests/");
+        
+                            sellRequest.on('value', function (posts) {
+                                posts.forEach(function (snapshot) {
+                                    var obj = snapshot.val();
+                                    if (obj.userID === user.uid) {
+                                        var toChangeRequest = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/SellRequests/" + obj.itemName),
+                                            toChangePost = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/Sell/" + obj.category + "/" + obj.itemName);
+                            
+                                        toChangeRequest.remove();
+                                        toChangePost.remove();
+                                    }
+                                });
+                            });
+                            buyRequest.on('value', function (posts) {
+                                posts.forEach(function (snapshot) {
+                                    var obj = snapshot.val();
+                                    if (obj.userID === user.uid) {
+                                        var toChangeRequest = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/BuyRequests/" + obj.itemName),
+                                            toChangePost = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/Buy/" + obj.category + "/" + obj.itemName);
+                                        toChangeRequest.remove();
+                                        toChangePost.remove();
+                                    }
+                                });
+                            });
+            
+                            alert('You have deleted your account, new heading back to the login page...');
+                            window.location.href = "index.html";
+                        
+                        }, function (error) {
                     // An error happened.
+                        });
+                
                     });
-                    
-                    
-                    
-                    var toDelete = firebase.auth().currentUser;
-
-
-                    toDelete.delete().then(function () {
-                        //Still need code to delete all posts associated with user
-                        alert('You have deleted your account, new heading back to the login page...');
-                        window.location.href = "index.html";
-                    }, function (error) {
-                    // An error happened.
-                    });
-
                 }
-            });
+                });
         } else {
             alert('Account not deleted');
         }
