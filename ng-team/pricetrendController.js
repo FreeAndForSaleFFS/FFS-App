@@ -7,6 +7,8 @@ angular
     //maximum amount of posts per page at page start.
 
         $scope.averageValue = 0;
+        var temp;
+
         var postsLimit = 5,
             urlCheck = document.location.href;
         if (urlCheck.includes("?")) {
@@ -34,7 +36,7 @@ angular
                 angular.forEach($scope.requestData, function (requestData) {
                     requestData.itemPrice = parseFloat(requestData.itemPrice);
                 });
-                $scope.computeAverage();
+                $scope.dataArray();
             });
         });
     
@@ -48,7 +50,7 @@ angular
                     angular.forEach($scope.requestData, function (requestData) {
                         requestData.itemPrice = parseFloat(requestData.itemPrice);
                     });
-                    $scope.computeAverage();
+                    $scope.dataArray();
                 });
             });
         };
@@ -62,7 +64,7 @@ angular
                     angular.forEach($scope.requestData, function (requestData) {
                         requestData.itemPrice = parseFloat(requestData.itemPrice);
                     });
-                    $scope.computeAverage();
+                    $scope.dataArray();
                 });
             });
         };
@@ -114,10 +116,11 @@ angular
             $scope.averageValue = average;
         };
 
-        $scope.dateArray = function () {
+        $scope.dataArray = function () {
             console.log("checkDate");
             var count = 0,
-                arrRet = [0],
+                priceRet = [],
+                dateRet = [],
                 average = $scope.averageValue,
                 searchText = $scope.searchBy;
             if (!searchText) {
@@ -131,12 +134,34 @@ angular
                 dataName = dataName.toUpperCase();
                 if (dataName.includes(searchText)) {
                     console.log(requestData.itemName);
-                    arrRet.push(requestData.itemPrice);
+                    priceRet.push(requestData.itemPrice);
+                    dateRet.push(requestData.time);
                 }
             });
-            var ret = arrRet.toString();
-            console.log("ret is: " + ret);
+
+            console.log("priceRet is: " + priceRet.toString());
+            console.log("dateRet is " + dateRet.toString());
     
-            $scope.averageValue = ret;
+            $scope.averageValue = priceRet.toString();
+            temp = priceRet;
+
+            var dataObj={
+                type:"line",
+                title:{
+                    text:"Chart Data Object"
+                },
+                series:[
+                    {
+                        values:priceRet
+                    }
+                ]
+            };
+
+            zingchart.render({ 
+                id : 'myChart', 
+                data : dataObj, 
+                height: '80%', 
+                width: '80%' 
+            });
         };
     });
