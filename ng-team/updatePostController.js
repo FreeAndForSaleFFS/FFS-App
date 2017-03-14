@@ -187,8 +187,8 @@ angular
                 newItemName = document.getElementById('newItemName').value,
                 newItemPrice = document.getElementById('newItemPrice').value,
                 newItemDescription = document.getElementById('newItemDescription').value,
-                myItemFirebaseSell = new Firebase(myItemRefSell),
-                myItemFirebaseSRQ = new Firebase(myItemRefSRQ);
+                myItemFirebaseBuy = new Firebase(myItemRefBuy),
+                myItemFirebaseBRQ = new Firebase(myItemRefBRQ);
             
              if(itemID === ""){
                 console.log("problem");
