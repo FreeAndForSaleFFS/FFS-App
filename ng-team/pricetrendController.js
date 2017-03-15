@@ -32,10 +32,12 @@ angular
 
         $scope.myRequestData = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/BuyRequests");
         $scope.requestData = {};
+        $scope.requestData2 = {};
     
         $scope.myRequestData.on('value', function (dataSnapshot) {
             $timeout(function () {
                 $scope.requestData = dataSnapshot.val();
+                $scope.requestData2 = dataSnapshot.exportVal();
                 angular.forEach($scope.requestData, function (requestData) {
                     requestData.itemPrice = parseFloat(requestData.itemPrice);
                 });
@@ -50,6 +52,7 @@ angular
             $scope.myRequestData.on('value', function (dataSnapshot) {
                 $timeout(function () {
                     $scope.requestData = dataSnapshot.val();
+                    $scope.requestData2 = dataSnapshot.exportVal();
                     angular.forEach($scope.requestData, function (requestData) {
                         requestData.itemPrice = parseFloat(requestData.itemPrice);
                     });
@@ -64,6 +67,7 @@ angular
             $scope.myRequestData.on('value', function (dataSnapshot) {
                 $timeout(function () {
                     $scope.requestData = dataSnapshot.val();
+                    $scope.requestData2 = dataSnapshot.exportVal();
                     angular.forEach($scope.requestData, function (requestData) {
                         requestData.itemPrice = parseFloat(requestData.itemPrice);
                     });
@@ -71,6 +75,7 @@ angular
                 });
             });
         };
+    
         $scope.amazonPrice = function () {
             var e = window.event,
                 btn = e.target || e.srcElement;
@@ -143,7 +148,20 @@ angular
             }
             searchText = searchText.toUpperCase();
             console.log(searchText);
-
+            
+            //SAHIB TRYING TO GET ARRAY AS DATA
+            
+            var myArray = $scope.requestData;
+            var myArray2 = Object.keys(myArray).map(function(k) { return myArray[k] });
+            console.log(myArray2.toString());
+            console.log(myArray2[0].time);
+            var objs = myArray2;
+            objs.sort(function(a,b) {return (a.time > b.time) ? 1 : ((b.time > a.time) ? -1 : 0);} );
+            for (var sahib in myArray2 ) {
+                console.log(myArray2[sahib]);
+            }
+            
+            /*
             angular.forEach($scope.requestData, function (requestData) {
                 var dataName = requestData.itemName;
                 dataName = dataName.toUpperCase();
@@ -153,10 +171,44 @@ angular
                     dateRet.push(requestData.time.substring(0,10));
                 }
             });
+            */
+            for(var index in myArray2) {
+                var requestData = myArray2[index];
+                var dataName = requestData.itemName;
+                dataName = dataName.toUpperCase();
+                if (dataName.includes(searchText)) {
+                    console.log(requestData.itemName);
+                    priceRet.push(requestData.itemPrice);
+                    dateRet.push(requestData.time.substring(0,10));
+                }
+            }
 
             console.log("priceRet is: " + priceRet.toString());
             console.log("dateRet is " + dateRet.toString());
     
+            var counter1 = 0;
+            var counter2 = 0;
+            var average = 0;
+            var averageCounter = 0;
+            var dateRet2 = [],
+                priceRet2 = [];
+            while(counter1 < priceRet.length) {
+                var currDate = dateRet[counter1];
+                var currTotal = priceRet[counter1];
+                averageCounter = 1;
+                while(counter1+1 < priceRet.length && dateRet[counter1+1] == dateRet[counter1] ) {
+                    counter1++;
+                    averageCounter++;
+                    currTotal = currTotal + priceRet[counter1];
+                }
+                average = currTotal/averageCounter;
+                dateRet2.push(currDate);
+                priceRet2.push(average);
+                counter1++;
+            }
+            console.log("priceRet2 is: " + priceRet2.toString());
+            console.log("dateRet2 is " + dateRet2.toString());
+            
             temp1 = priceRet;
             temp2 = dateRet;
 
@@ -187,7 +239,7 @@ angular
                     }
                 },
                 "scale-x": {
-                    "values" : dateRet,
+                    "values" : dateRet2,
                     "line-color": "#000000",
                     "label": {
                         "text": "Date",
@@ -263,7 +315,7 @@ angular
                 },
                 "series": [
                     {
-                        "values": priceRet,
+                        "values": priceRet2,
                         "text" : seriesName,
                         "legend-text" : seriesName
                     }
