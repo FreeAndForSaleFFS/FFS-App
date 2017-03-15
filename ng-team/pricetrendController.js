@@ -191,22 +191,35 @@ angular
             var average = 0;
             var averageCounter = 0;
             var dateRet2 = [],
-                priceRet2 = [];
+                averageRet = [],
+                maximumRet = [],
+                minimumRet = [];
             while(counter1 < priceRet.length) {
                 var currDate = dateRet[counter1];
                 var currTotal = priceRet[counter1];
+                var maximum = priceRet[counter1];
+                var minimum = priceRet[counter1];
                 averageCounter = 1;
                 while(counter1+1 < priceRet.length && dateRet[counter1+1] == dateRet[counter1] ) {
                     counter1++;
                     averageCounter++;
                     currTotal = currTotal + priceRet[counter1];
+                    if(priceRet[counter1] > maximum) {
+                        maximum = priceRet[counter1];
+                    }
+                    if(priceRet[counter1] < minimum) {
+                        minimum = priceRet[counter1];
+                    }
                 }
                 average = currTotal/averageCounter;
                 dateRet2.push(currDate);
-                priceRet2.push(average);
+                averageRet.push(average);
+                maximumRet.push(maximum);
+                minimumRet.push(minimum);
+                
                 counter1++;
             }
-            console.log("priceRet2 is: " + priceRet2.toString());
+            console.log("averageRet is: " + averageRet.toString());
             console.log("dateRet2 is " + dateRet2.toString());
             
             temp1 = priceRet;
@@ -315,9 +328,19 @@ angular
                 },
                 "series": [
                     {
-                        "values": priceRet2,
-                        "text" : seriesName,
-                        "legend-text" : seriesName
+                        "values": averageRet,
+                        "text" : "Average",
+                        "legend-text" : "Average"
+                    },
+                    {
+                        "values": maximumRet,
+                        "text" : "Maximum",
+                        "legend-text" : "Maximum"
+                    },
+                    {
+                        "values": minimumRet,
+                        "text" : "Minimum",
+                        "legend-text" : "Minimum"
                     }
                 ]
             };
