@@ -10,9 +10,11 @@ $(document).ready(function () {
         messagingSenderId: "29173486724"
     };
     firebase.initializeApp(config);
-    var database = firebase.database();
+    var database = firebase.database(),
+        EMAIL_LENGTH = 4,
+        NUMBER_LENGTH = 9,
+        TIME_OUT = 3000;
     function updateFirstName() {
-        var TIME_OUT = 3000;
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
                 var uid = user.uid,
@@ -56,7 +58,6 @@ $(document).ready(function () {
         window.setTimeout(location.reload.bind(location), TIME_OUT);
     }
     function updateLastName() {
-        var TIME_OUT = 3000;
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
                 var uid = user.uid,
@@ -102,10 +103,21 @@ $(document).ready(function () {
                     newEmail = document.getElementById('contactEmail').value,
                     myUserRef = "https://free-and-for-sale-8f8a4.firebaseio.com/users/" + uid,
                     myUserFirebase = new Firebase(myUserRef);
+                
+                
+                if (newEmail.length < EMAIL_LENGTH) {
+                    alert('Please enter an email address.');
+                    return;
+                }
+                if (!newEmail.endsWith("@ucsd.edu")) {
+                    alert('Please enter a valid UCSD email address.');
+                    return;
+                }
                 myUserFirebase.update({"contactEmail": newEmail});
+                location.reload();
+
             }
         });
-        location.reload();
     }
 
     function updatePassword() {
@@ -133,9 +145,12 @@ $(document).ready(function () {
       // [END sendpasswordemail];
     }
     function deleteAccount() {
-        var confirmation = confirm("Are you sure you want to delete your account? (You must fill out your login credentials again)"),
-            USER = window.prompt("Please enter your email"),
-            PASS = window.prompt("Please enter your password");
+        var confirmation = confirm("Are you sure you want to delete your account? (You must fill out your login credentials again)");
+        if (confirmation === true) {
+            var USER = window.prompt("Please enter your email"),
+                PASS = window.prompt("Please enter your password");
+        }
+        
         if (confirmation === true) {
             firebase.auth().onAuthStateChanged(function (user) {
                 if (user) {
@@ -152,12 +167,12 @@ $(document).ready(function () {
                         credential = firebase.auth.EmailAuthProvider.credential(
                             USER,
                             PASS
-                        );       
+                        );
                     reLogin.reauthenticate(credential).then(function () {
                         var toDelete = firebase.auth().currentUser;
 
                         myUserFirebase.remove();
-                        toDelete.delete().then(function () {                            
+                        toDelete.delete().then(function () {
                             
                             var sellRequest = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/SellRequests/"),
                                 buyRequest = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/BuyRequests/");
@@ -195,7 +210,7 @@ $(document).ready(function () {
                 
                     });
                 }
-                });
+            });
         } else {
             alert('Account not deleted');
         }
@@ -207,6 +222,11 @@ $(document).ready(function () {
                     newNumber = document.getElementById('contactPhone').value,
                     myUserRef = "https://free-and-for-sale-8f8a4.firebaseio.com/users/" + uid,
                     myUserFirebase = new Firebase(myUserRef);
+                
+                if (newNumber.length !== NUMBER_LENGTH) {
+                    alert('Please enter a valid phone number');
+                    return;
+                }
                 myUserFirebase.update({"contactNumber": newNumber});
             }
         });

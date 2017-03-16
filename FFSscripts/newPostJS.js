@@ -181,7 +181,6 @@ $(document).ready(function () {
             var userProperties = {};
             myUserData.on('value', function (dataSnapshot) {
                 userProperties = dataSnapshot.val();
-                console.log("lol");
                 userFirstName = userProperties.firstName;
                 userLastName = userProperties.lastName;
                 console.log(userFirstName);
@@ -190,7 +189,7 @@ $(document).ready(function () {
         }
     });
     document.getElementById('logoutLink').addEventListener('click', logoutAndLink);
-    document.getElementById('profileLink').addEventListener('click',profileLink);
+    document.getElementById('profileLink').addEventListener('click', profileLink);
     
     var buyButton = document.getElementById('newBuyButton');
     var sellButton = document.getElementById('newSellButton');
