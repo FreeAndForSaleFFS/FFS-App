@@ -24,7 +24,7 @@ angular
             comments: "This was undoubtably my favorite class at UCSD."
         },
         {
-            name: "Erik Syu",
+            name: "Eric Syu",
             image: "Images/Developers/Erik.jpg",
             title: "Software Architect",
             comments: "This was undoubtably my favorite class at UCSD."

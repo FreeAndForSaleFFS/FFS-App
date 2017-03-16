@@ -102,7 +102,6 @@ $(document).ready(function () {
                 alert('A link has been sent to your e-mail to verify your account');
                 sendEmailVerification();
                 if (file != "") {
-                    console.log("hahah");
                     var imgLink = "";
                     var storagelink = firebase.storage().ref('userImages/' + file.name);
                     var uploadTask = storagelink.put(file);

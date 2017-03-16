@@ -97,22 +97,23 @@ $(document).ready(function () {
     }
 
     function updateEmail() {
+        var newEmail = document.getElementById('contactEmail').value;
+        if (newEmail.length < EMAIL_LENGTH) {
+            alert('Please enter an email address.');
+                    return;
+        }
+        if (!newEmail.endsWith("@ucsd.edu")) {
+            alert('Please enter a valid UCSD email address.');
+            return;
+        }
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
                 var uid = user.uid,
-                    newEmail = document.getElementById('contactEmail').value,
                     myUserRef = "https://free-and-for-sale-8f8a4.firebaseio.com/users/" + uid,
                     myUserFirebase = new Firebase(myUserRef);
                 
                 
-                if (newEmail.length < EMAIL_LENGTH) {
-                    alert('Please enter an email address.');
-                    return;
-                }
-                if (!newEmail.endsWith("@ucsd.edu")) {
-                    alert('Please enter a valid UCSD email address.');
-                    return;
-                }
+
                 myUserFirebase.update({"contactEmail": newEmail});
                 location.reload();
 
@@ -121,7 +122,8 @@ $(document).ready(function () {
     }
 
     function updatePassword() {
-        var email = localStorage.getItem("email");
+        var email = document.getElementById('contactEmail').getAttribute("placeholder");
+
         if (email !== null) {
             firebase.auth().sendPasswordResetEmail(email).then(function () {
                 alert('Password Reset Email Sent To ' + email + '!');
@@ -171,7 +173,6 @@ $(document).ready(function () {
                     reLogin.reauthenticate(credential).then(function () {
                         var toDelete = firebase.auth().currentUser;
 
-                        myUserFirebase.remove();
                         toDelete.delete().then(function () {
                             
                             var sellRequest = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/SellRequests/"),
@@ -200,7 +201,7 @@ $(document).ready(function () {
                                     }
                                 });
                             });
-            
+                            myUserFirebase.remove();
                             alert('You have deleted your account, new heading back to the login page...');
                             window.location.href = "index.html";
                         
@@ -216,17 +217,16 @@ $(document).ready(function () {
         }
     }
     function updateContactNumber() {
+        var newNumber = document.getElementById('contactPhone').value;
+        if (newNumber.length !== NUMBER_LENGTH) {
+            alert('Please enter a valid phone number');
+            return;
+        }
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
                 var uid = user.uid,
-                    newNumber = document.getElementById('contactPhone').value,
                     myUserRef = "https://free-and-for-sale-8f8a4.firebaseio.com/users/" + uid,
                     myUserFirebase = new Firebase(myUserRef);
-                
-                if (newNumber.length !== NUMBER_LENGTH) {
-                    alert('Please enter a valid phone number');
-                    return;
-                }
                 myUserFirebase.update({"contactNumber": newNumber});
             }
         });
