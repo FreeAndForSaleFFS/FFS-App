@@ -59,7 +59,9 @@ angular
     
     
     
-    
+        $scope.cancelPost = function (){
+            window.location.href = "Browse.html";
+        };
     
         $scope.updateSellPost = function () {
             
