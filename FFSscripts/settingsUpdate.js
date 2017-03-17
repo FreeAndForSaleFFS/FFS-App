@@ -102,10 +102,7 @@ $(document).ready(function () {
             alert('Please enter an email address.');
                     return;
         }
-        if (!newEmail.endsWith("@ucsd.edu")) {
-            alert('Please enter a valid UCSD email address.');
-            return;
-        }
+
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
                 var uid = user.uid,
