@@ -14,20 +14,27 @@ angular
             tmp = params[i].split('=');
             data[tmp[0]] = tmp[1];
         }
-        console.log("haha" + data.name);
+        //console.log("haha" + data.name);
         $scope.profileuid = data.name;
     }
 
     $scope.myUserData = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/users/"+$scope.profileuid);
+    $scope.myUserReportData = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/users/"+$scope.profileuid + "/reported");
+    $scope.myUserReportData.on('value', function (dataSnapshot) {
+      $timeout(function () {
+          $scope.reportNum = dataSnapshot.numChildren();
+      });
+    });
     $scope.user = {};
     $scope.userUID = "";
+    var userDataBase = null;
     $scope.myUserData.on('value', function (dataSnapshot) {
       $timeout(function () {
           $scope.user = dataSnapshot.val();
           $scope.userUID = $scope.user.userID;
+          userDataBase = firebase.database().ref('users/'+ $scope.profileuid);
       });
     });
-    
     $scope.myBuyRequestData = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/BuyRequests");
     $scope.buyRequestData = {};
     
@@ -199,4 +206,20 @@ angular
                 }
             });  
     };
+    
+    $scope.report = function(){
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                var userReportData = null;
+                $timeout(function () {
+                    console.log(userDataBase);
+                    userReportData = userDataBase.child("reported");
+                    //var pushedData = userReportData.child(user.uid);
+                    userReportData.child(user.uid).set(user.uid);
+                    console.log(userReportData.key);
+                });
+            }
+        });  
+    }
+    
 });
