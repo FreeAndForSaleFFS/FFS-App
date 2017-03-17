@@ -39,6 +39,10 @@ $(document).ready(function () {
                 post.itemDescription = document.getElementById('newItemDescription').value;
                 post.category = document.getElementById('newItemCategory').value;
                 post.type = "BuyRequest";
+                if (post.itemName == null || post.itemName == "" || post.itemPrice == null || post.itemPrice == "" || post.itemDescription == null || post.itemDescription == "") {
+                    alert("Please fill all the fields");
+                    return;
+                }
                 post.userID = userId;
                 post.firstName = userFirstName;
                 post.lastName = userLastName;
@@ -68,6 +72,10 @@ $(document).ready(function () {
             post.itemDescription = document.getElementById('newItemDescription').value;
             post.category = document.getElementById('newItemCategory').value;
             post.type = "BuyRequest";
+            if (post.itemName == null || post.itemName == "" || post.itemPrice == null || post.itemPrice == "" || post.itemDescription == null || post.itemDescription == "") {
+                alert("Please fill all the fields");
+                return;
+            }
             post.userID = userId;
             post.firstName = userFirstName;
             post.lastName = userLastName;
@@ -109,6 +117,11 @@ $(document).ready(function () {
                 post.itemDescription = document.getElementById('newItemDescription').value;
                 post.category = document.getElementById('newItemCategory').value;
                 post.type = "SellRequest";
+                console.log(post.itemPrice);
+                if (post.itemName == null || post.itemName == "" || post.itemPrice == null || post.itemPrice == "" || post.itemDescription == null || post.itemDescription == "") {
+                    alert("Please fill all the fields");
+                    return;
+                }
                 post.userID = userId;
                 post.firstName = userFirstName;
                 post.lastName = userLastName;
@@ -138,6 +151,10 @@ $(document).ready(function () {
             post.itemDescription = document.getElementById('newItemDescription').value;
             post.category = document.getElementById('newItemCategory').value;
             post.type = "SellRequest";
+            if (post.itemName == null || post.itemName == "" || post.itemPrice == null || post.itemPrice == "" || post.itemDescription == null || post.itemDescription == "") {
+                alert("Please fill all the fields");
+                return;
+            }
             post.userID = userId;
             post.firstName = userFirstName;
             post.lastName = userLastName;

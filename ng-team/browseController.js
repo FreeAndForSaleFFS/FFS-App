@@ -6,9 +6,11 @@ angular
         'use strict';
     //maximum amount of posts per page at page start.
         $scope.averageValue = 0;
+    //initial category
         $scope.dataType = "All";
+    //initial choice between buy or sell requests
         $scope.buyOrSell = "buy";
-        var postsLimit = 5,
+        var postsLimit = 5, //number of posts per page
             urlCheck = document.location.href;
         if (urlCheck.includes("?")) {
             var url = document.location.href,
@@ -22,23 +24,25 @@ angular
                 data[tmp[0]] = tmp[1];
             }
             console.log("haha" + data.name);
-            $scope.searchBy = data.name;
+            $scope.searchBy = data.name; //when coming from another page, we parse link and store it in search bar
         }
-        $scope.predicate = '-time';
-
+        $scope.predicate = '-time'; //initially data sorted by date
+    
+    //initial firebase database is set to buyrequests
         $scope.myRequestData = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/BuyRequests");
         $scope.requestData = {};
-    
+    //Method: checks if current database in use is changed, then take screenshot
         $scope.myRequestData.on('value', function (dataSnapshot) {
             $timeout(function () {
                 $scope.requestData = dataSnapshot.val();
                 angular.forEach($scope.requestData, function (requestData) {
                     requestData.itemPrice = parseFloat(requestData.itemPrice);
-                });
-                $scope.computeAverage();
+                });//change itemprice from string to int
+                $scope.computeAverage(); //compute average
             });
         });
     
+    //change database to the buy one, with respective category with any
         $scope.buy = function () {
             $scope.buyOrSell = "buy";
             $scope.limit = postsLimit;
@@ -54,12 +58,12 @@ angular
                     $scope.requestData = dataSnapshot.val();
                     angular.forEach($scope.requestData, function (requestData) {
                         requestData.itemPrice = parseFloat(requestData.itemPrice);
-                    });
-                    $scope.computeAverage();
+                    }); //change itemprice from string to int
+                    $scope.computeAverage();//compute average
                 });
             });
         };
-    
+    //change database to the sell one, with respective category with any
         $scope.sell = function () {
             $scope.buyOrSell = "sell";
             $scope.limit = postsLimit;
@@ -80,7 +84,7 @@ angular
                 });
             });
         };
-    
+    //takes us to amazon current itemName data
         $scope.amazonPrice = function () {
             var e = window.event,
                 btn = e.target || e.srcElement;
@@ -91,13 +95,14 @@ angular
         };
 
 
-        $scope.limit = postsLimit;
+        $scope.limit = postsLimit; //initialize posts per page
 
         $scope.incrementLimit = function () {
-            $scope.limit += postsLimit;
+            $scope.limit += postsLimit; //changing posts per page
             console.log(postsLimit);
         };
         
+    //methods below are for changing databases according to category chosen
         $scope.setAll = function () {
             $scope.dataType = "All";
             if ($scope.buyOrSell == "buy") {
@@ -187,6 +192,9 @@ angular
                 $scope.sell();
             }
         };
+    
+    
+    //changes predicate with is used as an orderBy filter in ng-Repeat so data is sorted
         $scope.sortByDate = function () {
             $scope.predicate = "-time";
         };
@@ -195,6 +203,7 @@ angular
             $scope.predicate = "-itemPrice";
         };
     
+    //method to compute Average
         $scope.computeAverage = function () {
             console.log("check");
             var count = 0,

@@ -89,6 +89,22 @@ $(document).ready(function () {
             alert('Please enter a password.');
             return;
         }
+        if (firstname.length < 1) {
+            alert('Please enter a first name.');
+            return;
+        }
+        if (lastname.length < 1) {
+            alert('Please enter a last name.');
+            return;
+        }
+        if (contactemail.length < 4) {
+            alert('Please enter a valid contact email.');
+            return;
+        }
+        if (contactnumber.length < 4) {
+            alert('Please enter a valid contact number.');
+            return;
+        }
         if (confirmpassword != password) {
             alert('The two passwords input are not the same!');
             return;
