@@ -10,6 +10,10 @@ angular
         $scope.dataType = "All";
     //initial choice between buy or sell requests
         $scope.buyOrSell = "buy";
+        $scope.lookingFor = "> Looking For <";
+        $scope.forSale = "For Sale";
+        
+        
         var postsLimit = 5, //number of posts per page
             urlCheck = document.location.href;
         if (urlCheck.includes("?")) {
@@ -45,8 +49,10 @@ angular
     //change database to the buy one, with respective category with any
         $scope.buy = function () {
             $scope.buyOrSell = "buy";
+            $scope.lookingFor = "> Looking For <";
+            $scope.forSale = "For Sale";
             $scope.limit = postsLimit;
-            if($scope.dataType == "All") {
+            if($scope.dataType == "All") {  
                 $scope.myRequestData = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/BuyRequests");
             }
             else {
@@ -66,6 +72,8 @@ angular
     //change database to the sell one, with respective category with any
         $scope.sell = function () {
             $scope.buyOrSell = "sell";
+            $scope.lookingFor = "Looking For";
+            $scope.forSale = "> For Sale <";
             $scope.limit = postsLimit;
             if($scope.dataType == "All") {
                 $scope.myRequestData = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/SellRequests");
