@@ -72,6 +72,16 @@ $(document).ready(function () {
     //Function to check enetered values, whether or not a user is calling the function, and writing to the database
     function handleSignUp() {
         
+        //set the correct values to send to the database
+        var firstname = document.getElementById('signUpFirstName').value;
+        var lastname = document.getElementById('signUpLastName').value;
+        var email = document.getElementById('signUpEmail').value;
+        var contactemail = document.getElementById('signUpContactEmail').value;
+        var contactnumber = document.getElementById('signUpContactNumber').value;
+        var password = document.getElementById('signUpPassword').value;
+        var confirmpassword = document.getElementById('signUpConfirmPassword').value;
+        
+            
         //Check entered values are correct
         if (email.length < 4) {
             alert('Please enter an email address.');
@@ -106,16 +116,7 @@ $(document).ready(function () {
             return;
         }
         
-        //set the correct values to send to the database
-        var firstname = document.getElementById('signUpFirstName').value;
-        var lastname = document.getElementById('signUpLastName').value;
-        var email = document.getElementById('signUpEmail').value;
-        var contactemail = document.getElementById('signUpContactEmail').value;
-        var contactnumber = document.getElementById('signUpContactNumber').value;
-        var password = document.getElementById('signUpPassword').value;
-        var confirmpassword = document.getElementById('signUpConfirmPassword').value;
-        
-        
+
         var userimage = "http://www.murketing.com/journal/wp-content/uploads/2009/04/vimeo.jpg";
         // Sign in with email and pass.
         // [START createwithemail]
