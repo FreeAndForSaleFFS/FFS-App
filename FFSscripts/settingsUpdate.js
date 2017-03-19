@@ -12,7 +12,7 @@ $(document).ready(function () {
     firebase.initializeApp(config);
     var database = firebase.database(),
         EMAIL_LENGTH = 4,
-        NUMBER_LENGTH = 9,
+        NUMBER_LENGTH = 10,
         TIME_OUT = 3000;
     function updateFirstName() {
         firebase.auth().onAuthStateChanged(function (user) {

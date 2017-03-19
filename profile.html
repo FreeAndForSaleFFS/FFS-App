@@ -112,8 +112,8 @@
                         <div class = "col-md-3 col-lg-3" style="min-width: 300px"><h4><b>Price:</b> ${{request.itemPrice}}</h4></div>
                     </div>
                     <div class = "row">
-                        <button type ="button"  id = {{request.itemName}} ng-model = "deleteBuyPost" ng-click = "deleteBuyPost()">Delete</button>
-                        <button type ="button"  id = {{request.itemName}} ng-model = "updateBuyPost" ng-click = "updateBuyPost()">Update</button>
+                        <button type ="button"  id = {{request.itemName}}{{request.userID}} ng-model = "deleteBuyPost" ng-click = "deleteBuyPost()">Delete</button>
+                        <button type ="button"  id = {{request.itemName}}{{request.userID}} ng-model = "updateBuyPost" ng-click = "updateBuyPost()">Update</button>
                     </div>
                   </div>
                 </div>
@@ -142,8 +142,8 @@
                         <div class = "col-md-3 col-lg-3" style="min-width: 300px"><h4><b>Price:</b> ${{request.itemPrice}}</h4></div>
                     </div>
                     <div class = "row">
-                        <button type ="button"  id = {{request.itemName}} ng-model = "deleteSellPost" ng-click = "deleteSellPost()">Delete</button>
-                        <button type ="button"  id = {{request.itemName}} ng-model = "updateSellPost" ng-click = "updateSellPost()">Update</button>
+                        <button type ="button"  id = {{request.itemName}}{{request.userID}} ng-model = "deleteSellPost" ng-click = "deleteSellPost()">Delete</button>
+                        <button type ="button"  id = {{request.itemName}}{{request.userID}} ng-model = "updateSellPost" ng-click = "updateSellPost()">Update</button>
 
                     </div>
                     </div>

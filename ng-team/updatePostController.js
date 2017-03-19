@@ -28,7 +28,8 @@ angular
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
                 var itemName = localStorage.getItem("itemName"),
-                    myUserRef = "https://free-and-for-sale-8f8a4.firebaseio.com/posts/SellRequests/" + itemName;
+                    itemUID = localStorage.getItem("userID"),
+                    myUserRef = "https://free-and-for-sale-8f8a4.firebaseio.com/posts/SellRequests/" + itemName + itemUID;
                 $scope.myItemData = new Firebase(myUserRef);
                 $scope.itemSell = {};
                 $scope.myItemData.on('value', function (dataSnapShot) {
@@ -44,7 +45,8 @@ angular
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
                 var itemName = localStorage.getItem("itemName"),
-                    myUserRef = "https://free-and-for-sale-8f8a4.firebaseio.com/posts/BuyRequests/" + itemName;
+                    itemUID = localStorage.getItem("userID"),
+                    myUserRef = "https://free-and-for-sale-8f8a4.firebaseio.com/posts/BuyRequests/" + itemName + itemUID;
                 $scope.myItemData = new Firebase(myUserRef);
                 $scope.itemBuy = {};
                 $scope.myItemData.on('value', function (dataSnapShot) {
@@ -112,8 +114,8 @@ angular
             }, function(error) {
             }, function() {
                 post.imageLink = uploadTask.snapshot.downloadURL;
-                post.itemName = newItemPrice;
-                post.itemPrice = newItemName;
+                post.itemName = newItemName;
+                post.itemPrice = newItemPrice;
                 post.checked = false;
                 if(document.getElementById('negotiableCheck').checked) {
                     post.checked = true;
@@ -124,7 +126,7 @@ angular
                 post.userID = localStorage.getItem("userID");
                 post.firstName = localStorage.getItem("firstName");
                 post.lastName = localStorage.getItem("lastName");
-                entryKey = post.itemName;
+                entryKey = post.itemName + post.userID;
                 console.log(post.itemName);
                 firebase.database().ref('posts/SellRequests/' + entryKey).set(
                     post,
@@ -153,7 +155,7 @@ angular
             post.userID = localStorage.getItem("userID");
             post.firstName = localStorage.getItem("firstName");
             post.lastName = localStorage.getItem("lastName");
-            entryKey = post.itemName;
+            entryKey = post.itemName + post.userID;
             firebase.database().ref('posts/SellRequests/' + entryKey).set(
                 post,
                 function (onComplete) {
@@ -225,8 +227,8 @@ angular
             }, function(error) {
             }, function() {
                 post.imageLink = uploadTask.snapshot.downloadURL;
-                post.itemName = newItemPrice;
-                post.itemPrice = newItemName;
+                post.itemName = newItemName;
+                post.itemPrice = newItemPrice;
                 post.checked = false;
                 if(document.getElementById('negotiableCheck').checked) {
                     post.checked = true;
@@ -237,7 +239,7 @@ angular
                 post.userID = localStorage.getItem("userID");
                 post.firstName = localStorage.getItem("firstName");
                 post.lastName = localStorage.getItem("lastName");
-                entryKey = post.itemName;
+                entryKey = post.itemName + post.userID;
                 console.log(post.itemName);
                 firebase.database().ref('posts/BuyRequests/' + entryKey).set(
                     post,
@@ -266,7 +268,7 @@ angular
             post.userID = localStorage.getItem("userID");
             post.firstName = localStorage.getItem("firstName");
             post.lastName = localStorage.getItem("lastName");
-            entryKey = post.itemName;
+            entryKey = post.itemName + post.userID;
             firebase.database().ref('posts/BuyRequests/' + entryKey).set(
                 post,
                 function (onComplete) {
