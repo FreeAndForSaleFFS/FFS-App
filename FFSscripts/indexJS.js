@@ -69,6 +69,7 @@ $(document).ready(function () {
       // [END sendemailverification]
     }
     
+    //Function to check enetered values, whether or not a user is calling the function, and writing to the database
     function handleSignUp() {
         
         //Check entered values are correct
@@ -184,6 +185,7 @@ $(document).ready(function () {
       // [END sendpasswordemail];
     }
     
+    //function to write user data to database
     function writeUserData(userId, firstname, lastname, email,contactemail,contactnumber,userImage) {
         firebase.database().ref('users/' + userId).set(
             {
