@@ -70,13 +70,8 @@ $(document).ready(function () {
     }
     
     function handleSignUp() {
-        var firstname = document.getElementById('signUpFirstName').value;
-        var lastname = document.getElementById('signUpLastName').value;
-        var email = document.getElementById('signUpEmail').value;
-        var contactemail = document.getElementById('signUpContactEmail').value;
-        var contactnumber = document.getElementById('signUpContactNumber').value;
-        var password = document.getElementById('signUpPassword').value;
-        var confirmpassword = document.getElementById('signUpConfirmPassword').value;
+        
+        //Check entered values are correct
         if (email.length < 4) {
             alert('Please enter an email address.');
             return;
@@ -109,9 +104,21 @@ $(document).ready(function () {
             alert('The two passwords input are not the same!');
             return;
         }
+        
+        //set the correct values to send to the database
+        var firstname = document.getElementById('signUpFirstName').value;
+        var lastname = document.getElementById('signUpLastName').value;
+        var email = document.getElementById('signUpEmail').value;
+        var contactemail = document.getElementById('signUpContactEmail').value;
+        var contactnumber = document.getElementById('signUpContactNumber').value;
+        var password = document.getElementById('signUpPassword').value;
+        var confirmpassword = document.getElementById('signUpConfirmPassword').value;
+        
+        
         var userimage = "http://www.murketing.com/journal/wp-content/uploads/2009/04/vimeo.jpg";
         // Sign in with email and pass.
         // [START createwithemail]
+        //Function to only allow users to write data
         firebase.auth().createUserWithEmailAndPassword(email, password)
             .then(function (user) {
                 //signup_success = true;
@@ -126,10 +133,12 @@ $(document).ready(function () {
                     }, function() {
                         userimage = uploadTask.snapshot.downloadURL;
                         console.log("haha" + userimage);
+                        //write data for no picture
                         writeUserData(user.uid, firstname, lastname, email,contactemail,contactnumber,userimage);
                     });
                 }
                 else {
+                    //write data for known picture
                     writeUserData(user.uid, firstname, lastname, email,contactemail,contactnumber,userimage);
                 }
             })
