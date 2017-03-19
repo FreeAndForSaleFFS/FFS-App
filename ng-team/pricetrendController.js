@@ -104,7 +104,7 @@ angular
         $scope.computeAverage = function () {
             console.log("check");
             var count = 0,
-                average = $scope.averageValue,
+                average = 0,
                 searchText = $scope.searchBy;
             if (!searchText) {
                 searchText = "";
