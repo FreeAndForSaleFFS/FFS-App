@@ -76,7 +76,7 @@ $(document).ready(function () {
             alert('Please enter an email address.');
             return;
         }
-        if (!email.endsWith("@ucsd.edu")) {
+        if (!email.endsWith("ucsd.edu")) {
             alert('Please enter a valid UCSD email address.');
             return;
         }

@@ -9,7 +9,7 @@ angular
             name: "Sahib Grover",
             image: "Images/Developers/Sahib.jpg",
             title: "Project Manager",
-            comments: "This was undoubtably my favorite class at UCSD. I love cheesecake"
+            comments: "This was undoubtably my favorite class at UCSD. I love cheesecake and Gary."
         },
         {
             name: "Douglas Pan",
@@ -27,7 +27,7 @@ angular
             name: "Eric Syu",
             image: "Images/Developers/Erik.jpg",
             title: "Software Architect",
-            comments: "This was undoubtably my favorite class at UCSD."
+            comments: "I wish my code could write itself."
         },
         {
             name: "Vincent Tsui",

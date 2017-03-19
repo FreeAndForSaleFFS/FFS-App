@@ -7,6 +7,8 @@ angular
     //maximum amount of posts per page at page start.
 
         $scope.averageValue = 0;
+        $scope.lookingFor = "> Looking For <";
+        $scope.forSale = "For Sale";
         var temp1;
         var temp2;
         var seriesName = "";
@@ -47,6 +49,8 @@ angular
     
         $scope.buy = function () {
             $scope.limit = postsLimit;
+            $scope.lookingFor = "> Looking For <";
+            $scope.forSale = "For Sale";
             $scope.myRequestData = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/BuyRequests");
             console.log("buy");
             $scope.myRequestData.on('value', function (dataSnapshot) {
@@ -62,6 +66,8 @@ angular
         };
         $scope.sell = function () {
             $scope.limit = postsLimit;
+            $scope.lookingFor = "Looking For";
+            $scope.forSale = "> For Sale <";
             $scope.myRequestData = new Firebase("https://free-and-for-sale-8f8a4.firebaseio.com/posts/SellRequests");
             console.log("sell");
             $scope.myRequestData.on('value', function (dataSnapshot) {
