@@ -90,7 +90,7 @@
                     </select><br/>
                     <progress value="0"  max="100" id="uploader">0%</progress>
                     <input type="file" value="upload" id="fileButton" />
-                    <button type ="button" class= "newButtons" id = {{itemSell.itemName}} ng-model = "updateSellPost" ng-click = "updateSellPost()">Save</button>
+                    <button type ="button" class= "newButtons" id = {{itemSell.itemName}}{{itemSell.userID}} ng-model = "updateSellPost" ng-click = "updateSellPost()">Save</button>
                     <button type ="button" class= "newButtons" id = {{itemSell.itemName}} ng-model = "cancelPost" ng-click = "cancelPost()">Cancel</button>
 
                 </form>
