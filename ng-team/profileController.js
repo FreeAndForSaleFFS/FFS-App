@@ -210,6 +210,10 @@ angular
     $scope.report = function(){
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
+                var confirmation = confirm("Are you sure you want to report this user?");
+                if (confirmation === false) {
+                    return;
+                }
                 var userReportData = null;
                 $timeout(function () {
                     console.log(userDataBase);
