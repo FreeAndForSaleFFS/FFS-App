@@ -46,7 +46,7 @@ $(document).ready(function () {
                 post.userID = userId;
                 post.firstName = userFirstName;
                 post.lastName = userLastName;
-                entryKey = post.itemName;
+                entryKey = post.itemName + post.userID;
                 console.log(post.itemName);
                 firebase.database().ref('posts/BuyRequests/' + entryKey).set(
                     post,
@@ -79,7 +79,7 @@ $(document).ready(function () {
             post.userID = userId;
             post.firstName = userFirstName;
             post.lastName = userLastName;
-            entryKey = post.itemName;
+            entryKey = post.itemName + post.userID;
             console.log(post.itemName);
             firebase.database().ref('posts/BuyRequests/' + entryKey).set(
                 post,
@@ -125,7 +125,7 @@ $(document).ready(function () {
                 post.userID = userId;
                 post.firstName = userFirstName;
                 post.lastName = userLastName;
-                entryKey = post.itemName;
+                entryKey = post.itemName + post.userID;
                 console.log(post.itemName);
                 firebase.database().ref('posts/SellRequests/' + entryKey).set(
                     post,
@@ -158,7 +158,7 @@ $(document).ready(function () {
             post.userID = userId;
             post.firstName = userFirstName;
             post.lastName = userLastName;
-            entryKey = post.itemName;
+            entryKey = post.itemName + post.userID;
             console.log(post.itemName);
             firebase.database().ref('posts/SellRequests/' + entryKey).set(
                 post,
